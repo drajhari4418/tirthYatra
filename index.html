@@ -62,7 +62,10 @@
         .rd-navbar-brand .brand::after{font-size:18px;}
       }
       /* Remove unwanted gap between navigation header and hero slider */
-      header.page-header, header{margin-bottom:0!important;padding-bottom:0!important;}
+      header.page-header, header{margin:0!important;padding:0!important;}
+      header.page-header.section{min-height:0!important;}
+      header.page-header .rd-navbar-wrap{margin:0!important;}
+      .page-header + .swiper-slider-3{margin-top:0!important;}
       .swiper-slider-3{margin-top:0!important;}
       /* HD pilgrimage slider backgrounds + stronger text contrast */
       .swiper-slider-3 .swiper-slide{
