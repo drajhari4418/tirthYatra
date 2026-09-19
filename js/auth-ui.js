@@ -7,12 +7,26 @@ function mountAuthUI() {
   const wrap = document.createElement("div");
   wrap.id = "ty-auth-ui";
   wrap.innerHTML = `
-    <div class="ty-auth-bar" style="position:fixed;top:12px;right:16px;z-index:10000;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;background:#fff8ee;border:1px solid #eadbc8;border-radius:10px;box-shadow:0 4px 14px rgba(74,40,12,.12);font:13px system-ui">
+    <style>
+      .ty-auth-bar{position:fixed;top:14px;right:18px;z-index:10000;display:flex;align-items:center;gap:7px;padding:6px;background:rgba(255,250,242,.94);backdrop-filter:blur(10px);border:1px solid #eadbc8;border-radius:16px;box-shadow:0 8px 28px rgba(74,40,12,.18);font:13px system-ui;transition:.25s ease}
+      .ty-auth-right{display:flex;align-items:center;gap:5px;margin-left:0!important;order:2}
+      .ty-auth-right a,.ty-auth-right button{display:inline-flex;align-items:center;gap:5px;border:1px solid #eadbc8;border-radius:11px;padding:7px 10px;background:#fff;color:#713b19;text-decoration:none;font-weight:650;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,color .2s ease}
+      .ty-auth-right a:hover,.ty-auth-right button:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(113,59,25,.16);background:#fff3df;color:#9b4b18}
+      .ty-auth-right a:first-of-type:before{content:"🪔";font-size:14px}
+      .ty-auth-right a:nth-of-type(2):before{content:"🛕";font-size:14px}
+      #ty-user-label{padding:7px 10px;border-radius:11px;background:linear-gradient(135deg,#fff1d6,#ffe5bd);color:#713b19;font-weight:750;white-space:nowrap}
+      #ty-login-btn{border-color:#c76a25;background:linear-gradient(135deg,#c76a25,#9e4617);color:#fff}
+      #ty-login-btn:hover{background:linear-gradient(135deg,#d97a31,#a9501d);color:#fff}
+      #ty-logout-btn{order:1;border:1px solid #eadbc8;border-radius:11px;padding:7px 10px;background:#fff;color:#713b19;font-weight:650;cursor:pointer;transition:.2s}
+      #ty-logout-btn:hover{transform:translateY(-2px);background:#fff3df}
+      @media(max-width:600px){.ty-auth-bar{top:8px;right:8px;left:8px;justify-content:flex-end;border-radius:14px}.ty-auth-right{flex-wrap:wrap;justify-content:flex-end}.ty-auth-right a,.ty-auth-right button,#ty-logout-btn,#ty-user-label{padding:6px 8px;font-size:11px}}
+    </style>
+    <div class="ty-auth-bar">
       <button id="ty-logout-btn" type="button" hidden>Logout</button>
-      <span class="ty-auth-right" style="display:flex;align-items:center;gap:8px;margin-left:auto">
+      <span class="ty-auth-right">
         <span id="ty-user-label">Guest</span>
-        <a href="prasads.html">Prasads</a>
-        <a href="temple-visits.html">Temple Visits</a>
+        <a href="prasads.html" title="Explore Prasads">Prasads</a>
+        <a href="temple-visits.html" title="Explore Temple Visits">Temple Visits</a>
         <button id="ty-login-btn" type="button">Login</button>
       </span>
     </div>
@@ -129,7 +143,6 @@ onAuthStateChanged(auth, async user => {
     login.hidden=true; logout.hidden=false;
     document.querySelector(".ty-auth-right")?.style.setProperty("order","2");
     logout.style.order="1";
-    logout.style.marginRight="0";
     try {
       const profile=await ensureUserProfile(user);
       if(profile?.role==="admin" && !document.querySelector('a[href="admin.html"]')) {
