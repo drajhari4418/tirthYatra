@@ -11,7 +11,7 @@ function mountAuthUI() {
       .ty-auth-bar{position:fixed;top:14px;right:18px;z-index:10000;display:flex;align-items:center;gap:7px;padding:6px;background:rgba(255,250,242,.94);backdrop-filter:blur(10px);border:1px solid #eadbc8;border-radius:16px;box-shadow:0 8px 28px rgba(74,40,12,.18);font:13px system-ui;transition:.25s ease}
       .ty-auth-right{display:flex;align-items:center;gap:5px}
       .ty-auth-user{display:flex;align-items:center;gap:5px}
-      .ty-auth-service-links{position:fixed;top:82px;left:18px;z-index:10001;display:flex;align-items:center;gap:6px;padding:6px;background:rgba(255,250,242,.94);backdrop-filter:blur(10px);border:1px solid #eadbc8;border-radius:16px;box-shadow:0 8px 28px rgba(74,40,12,.18)}
+      .ty-auth-service-links{position:fixed;top:14px;left:18px;z-index:10001;display:flex;align-items:center;gap:6px;padding:6px;background:rgba(255,250,242,.94);backdrop-filter:blur(10px);border:1px solid #eadbc8;border-radius:16px;box-shadow:0 8px 28px rgba(74,40,12,.18)}
       .ty-auth-service-links a{display:inline-flex;align-items:center;gap:5px;border:1px solid #eadbc8;border-radius:11px;padding:7px 10px;background:#fff;color:#713b19;text-decoration:none;font:650 13px system-ui;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,color .2s ease}
       .ty-auth-service-links a:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(113,59,25,.16);background:#fff3df;color:#9b4b18}
       .ty-auth-service-links a:first-of-type:before{content:"🪔";font-size:14px}
@@ -21,7 +21,7 @@ function mountAuthUI() {
       #ty-login-btn:hover{background:linear-gradient(135deg,#d97a31,#a9501d);color:#fff;transform:translateY(-2px)}
       #ty-logout-btn{order:1;border:1px solid #eadbc8;border-radius:11px;padding:7px 10px;background:#fff;color:#713b19;font-weight:650;cursor:pointer;transition:.2s}
       #ty-logout-btn:hover{transform:translateY(-2px);background:#fff3df}
-      @media(max-width:600px){.ty-auth-bar{top:8px;right:8px;left:auto;border-radius:14px}.ty-auth-service-links{top:72px;left:8px;right:auto;gap:3px;padding:5px;border-radius:14px}.ty-auth-service-links a{padding:6px 8px;font-size:11px}.ty-auth-right{flex-wrap:wrap;justify-content:flex-end}.ty-auth-right a,.ty-auth-right button,#ty-logout-btn,#ty-user-label{padding:6px 8px;font-size:11px}}
+      @media(max-width:600px){.ty-auth-bar{top:8px;right:8px;left:auto;border-radius:14px}.ty-auth-service-links{top:8px;left:8px;right:auto;gap:3px;padding:5px;border-radius:14px}.ty-auth-service-links a{padding:6px 8px;font-size:11px}.ty-auth-right{flex-wrap:wrap;justify-content:flex-end}.ty-auth-right a,.ty-auth-right button,#ty-logout-btn,#ty-user-label{padding:6px 8px;font-size:11px}}
     </style>
     <div class="ty-auth-service-links">
       <a href="prasads.html" title="Explore Prasads">Prasads</a>
