@@ -7,7 +7,7 @@ function mountAuthUI() {
   const wrap = document.createElement("div");
   wrap.id = "ty-auth-ui";
   wrap.innerHTML = `
-    <div class="ty-auth-bar" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 16px;background:#fff8ee;border-bottom:1px solid #eadbc8;font:14px system-ui">
+    <div class="ty-auth-bar" style="position:fixed;top:12px;right:16px;z-index:10000;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;background:#fff8ee;border:1px solid #eadbc8;border-radius:10px;box-shadow:0 4px 14px rgba(74,40,12,.12);font:13px system-ui">
       <span id="ty-user-label">Guest</span>
       <a href="prasads.html">Prasads</a>
       <a href="temple-visits.html">Temple Visits</a>
@@ -42,8 +42,9 @@ function mountAuthUI() {
     const c=await createUserWithEmailAndPassword(auth,email(),password());
     const n=document.getElementById("ty-auth-name").value.trim();
     if(n) await updateProfile(c.user,{displayName:n});
-    await ensureUserProfile(c.user);
+    try { await ensureUserProfile(c.user); } catch(e) { console.error("Profile creation failed after successful signup:", e); }
     modal.hidden=true;
+    location.replace("index.html");
   }catch(e){error(e)}};
   document.getElementById("ty-google").onclick=async()=>{try{
     const r=await signInWithPopup(auth,googleProvider);
