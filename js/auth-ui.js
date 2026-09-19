@@ -16,7 +16,6 @@ function mountAuthUI() {
     </div>
     <div id="ty-auth-modal" class="ty-auth-modal" hidden style="position:fixed;inset:0;background:#0008;z-index:9999;padding:30px">
       <div class="ty-auth-card" style="max-width:420px;margin:8vh auto;background:white;padding:24px;border-radius:14px">
-        <button id="ty-auth-close" type="button" style="float:right">×</button>
         <h3>Sign in to TirthYatra</h3>
         <p id="ty-auth-error" style="color:#b42318"></p>
         <input id="ty-auth-name" placeholder="Name (for sign up)" style="width:100%;padding:10px;margin:6px 0">
@@ -34,7 +33,6 @@ function mountAuthUI() {
 
   const modal=document.getElementById("ty-auth-modal");
   document.getElementById("ty-login-btn").onclick=()=>modal.hidden=false;
-  document.getElementById("ty-auth-close").onclick=()=>modal.hidden=true;
   const email=()=>document.getElementById("ty-auth-email").value.trim();
   const password=()=>document.getElementById("ty-auth-password").value;
   const error=e=>document.getElementById("ty-auth-error").textContent=e?.message?.replace("Firebase: ","") || String(e);
