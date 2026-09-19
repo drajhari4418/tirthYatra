@@ -89,6 +89,7 @@ function mountAuthUI() {
     try{
       await signInWithEmailAndPassword(auth,e,p);
       modal.hidden=true;
+      localStorage.setItem("tyFirstVisitCompleted","1");
       location.replace("index.html");
     }catch(e){
       const code=e?.code || "";
@@ -111,6 +112,7 @@ function mountAuthUI() {
       if(n) await updateProfile(c.user,{displayName:n});
       try { await ensureUserProfile(c.user); } catch(e) { console.error("Profile creation failed after successful signup:", e); }
       modal.hidden=true;
+      localStorage.setItem("tyFirstVisitCompleted","1");
       location.replace("index.html");
     }catch(e){
       if(e?.code==="auth/email-already-in-use"){
@@ -127,6 +129,7 @@ function mountAuthUI() {
       const r=await signInWithPopup(auth,googleProvider);
       await ensureUserProfile(r.user);
       modal.hidden=true;
+      localStorage.setItem("tyFirstVisitCompleted","1");
       location.replace("index.html");
     }catch(e){error(e)}
   };
