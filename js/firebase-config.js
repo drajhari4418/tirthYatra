@@ -1,11 +1,13 @@
-// Firebase web configuration.
-// These values are safe to expose in client-side code. Do NOT put service-account/private keys here.
-// Replace the placeholders with your Firebase project's Web App configuration.
+// Firebase web configuration for TirthYatra.
+// These values are safe to expose in client-side browser code.
+// Never put Firebase Admin/service-account private keys here.
 export const firebaseConfig = {
-  apiKey: "REPLACE_WITH_FIREBASE_API_KEY",
-  authDomain: "REPLACE_WITH_FIREBASE_PROJECT_ID.firebaseapp.com",
-  projectId: "REPLACE_WITH_FIREBASE_PROJECT_ID",
-  storageBucket: "REPLACE_WITH_FIREBASE_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "REPLACE_WITH_FIREBASE_MESSAGING_SENDER_ID",
-  appId: "REPLACE_WITH_FIREBASE_APP_ID"
+  apiKey: "AIzaSyBvf_5b5YhAB6_eg0vapjLNA0dSR9Ap5lo",
+  authDomain: "tirth-yatra-3a5f2.firebaseapp.com",
+  projectId: "tirth-yatra-3a5f2",
+  storageBucket: "tirth-yatra-3a5f2.firebasestorage.app",
+  messagingSenderId: "783898250589",
+  appId: "1:783898250589:web:b9d26e4e4e4bce4da66cb4",
+  measurementId: "G-6LF6RHHPRT",
+  databaseURL: "https://tirth-yatra-3a5f2-default-rtdb.europe-west1.firebasedatabase.app"
 };
