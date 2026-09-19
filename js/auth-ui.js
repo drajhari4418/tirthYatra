@@ -128,7 +128,8 @@ onAuthStateChanged(auth, async user => {
     label.textContent=user.displayName || user.email || "Signed in";
     login.hidden=true; logout.hidden=false;
     document.querySelector(".ty-auth-links")?.style.setProperty("order","3");
-    logout.style.order="4";
+    logout.style.order="1";
+    logout.style.marginRight="auto";
     try {
       const profile=await ensureUserProfile(user);
       if(profile?.role==="admin" && !document.querySelector('a[href="admin.html"]')) {
