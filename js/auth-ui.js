@@ -145,13 +145,7 @@ onAuthStateChanged(auth, async user => {
     login.hidden=true; logout.hidden=false;
     document.querySelector(".ty-auth-right")?.style.setProperty("order","2");
     logout.style.order="1";
-    try {
-      const profile=await ensureUserProfile(user);
-      if(profile?.role==="admin" && !document.querySelector('a[href="admin.html"]')) {
-        const a=document.createElement("a"); a.href="admin.html"; a.textContent="Admin"; a.className="ty-admin-link";
-        document.querySelector(".ty-auth-bar")?.appendChild(a);
-      }
-    } catch(e) { console.error("Profile sync failed",e); }
+try { await ensureUserProfile(user); } catch(e) { console.error("Profile sync failed",e); }
     if (location.pathname.endsWith("/auth.html") || location.pathname.endsWith("/auth")) location.replace("index.html");
   } else {
     label.textContent="Guest"; login.hidden=false; logout.hidden=true;
