@@ -13,14 +13,24 @@ export { GoogleAuthProvider, signInWithPopup, signOut, createUserWithEmailAndPas
 export async function ensureUserProfile(user) {
   const userRef = ref(db, `users/${user.uid}`);
   const snap = await get(userRef);
+  const provider = user.providerData?.[0]?.providerId || "password";
+  const base = {
+    uid: user.uid,
+    name: user.displayName || "",
+    email: user.email || "",
+    photoURL: user.photoURL || "",
+    provider,
+    lastLoginAt: Date.now()
+  };
+
   if (!snap.exists()) {
-    await set(userRef, {
-      uid: user.uid,
-      name: user.displayName || "",
-      email: user.email || "",
-      photoURL: user.photoURL || "",
-      role: "user",
-      createdAt: Date.now()
+    await set(userRef, { ...base, role: "user", createdAt: Date.now() });
+  } else {
+    const existing = snap.val() || {};
+    await update(userRef, {
+      ...base,
+      role: existing.role || "user",
+      createdAt: existing.createdAt || Date.now()
     });
   }
   return (await get(userRef)).val();
