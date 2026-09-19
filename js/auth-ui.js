@@ -32,27 +32,73 @@ function mountAuthUI() {
   target.appendChild(wrap);
 
   const modal=document.getElementById("ty-auth-modal");
-  document.getElementById("ty-login-btn").onclick=()=>modal.hidden=false;
+  const nameInput=document.getElementById("ty-auth-name");
+  const signinBtn=document.getElementById("ty-signin");
+  const signupBtn=document.getElementById("ty-signup");
+  const googleBtn=document.getElementById("ty-google");
   const email=()=>document.getElementById("ty-auth-email").value.trim();
   const password=()=>document.getElementById("ty-auth-password").value;
   const error=e=>document.getElementById("ty-auth-error").textContent=e?.message?.replace("Firebase: ","") || String(e);
 
-  document.getElementById("ty-signin").onclick=async()=>{try{
+  const showLogin=()=>{
+    nameInput.style.display="none";
+    signupBtn.style.display="none";
+    googleBtn.textContent="Continue with Google";
+    signinBtn.textContent="Sign in";
+    error("");
+  };
+  const showSignup=()=>{
+    nameInput.style.display="";
+    signupBtn.style.display="";
+    googleBtn.textContent="Sign up / continue with Google";
+    signinBtn.textContent="Sign in";
+    error("");
+  };
+
+  document.getElementById("ty-login-btn").onclick=()=>{modal.hidden=false;showLogin();};
+  signinBtn.onclick=async()=>{
     const e=email(), p=password();
     if(!e || !p){ error("Please enter your email and password."); return; }
-    await signInWithEmailAndPassword(auth,e,p);
-    modal.hidden=true;
-    location.replace("index.html");
-  }catch(e){
-    const code=e?.code || "";
-    if(code==="auth/user-not-found" || code==="auth/invalid-credential" || code==="auth/invalid-login-credentials"){
-      error("Account not found. Please create an account first.");
-    } else if(code==="auth/wrong-password"){
-      error("Incorrect password. Please try again.");
-    } else {
-      error(e);
+    try{
+      await signInWithEmailAndPassword(auth,e,p);
+      modal.hidden=true;
+      location.replace("index.html");
+    }catch(e){
+      const code=e?.code || "";
+      if(code==="auth/user-not-found" || code==="auth/invalid-credential" || code==="auth/invalid-login-credentials"){
+        error("Account not found. Please create an account first.");
+      } else if(code==="auth/wrong-password"){
+        error("Incorrect password. Please try again.");
+      } else {
+        error(e);
+      }
     }
-  }};
+  };
+  signupBtn.onclick=async()=>{
+    try{
+      const c=await createUserWithEmailAndPassword(auth,email(),password());
+      const n=nameInput.value.trim();
+      if(n) await updateProfile(c.user,{displayName:n});
+      try { await ensureUserProfile(c.user); } catch(e) { console.error("Profile creation failed after successful signup:", e); }
+      modal.hidden=true;
+      location.replace("index.html");
+    }catch(e){
+      if(e?.code==="auth/email-already-in-use"){
+        showLogin();
+        error("This account already exists. Please sign in with your password.");
+      } else {
+        error(e);
+      }
+    }
+  };
+  googleBtn.onclick=async()=>{
+    try{
+      const r=await signInWithPopup(auth,googleProvider);
+      await ensureUserProfile(r.user);
+      modal.hidden=true;
+      location.replace("index.html");
+    }catch(e){error(e)}
+  };
   document.getElementById("ty-signup").onclick=async()=>{try{
     const c=await createUserWithEmailAndPassword(auth,email(),password());
     const n=document.getElementById("ty-auth-name").value.trim();
