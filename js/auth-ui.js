@@ -113,7 +113,8 @@ function mountAuthUI() {
     }catch(e){error(e)}
   };
 
-  document.getElementById("ty-logout-btn").onclick=()=>signOut(auth);\n  showSignup();
+  document.getElementById("ty-logout-btn").onclick=()=>signOut(auth);
+  showSignup();
 }
 
 mountAuthUI();
