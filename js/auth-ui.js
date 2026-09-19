@@ -25,11 +25,12 @@ function mountAuthUI() {
         <div style="display:grid;gap:8px;margin-top:10px">
           <button id="ty-signin" type="button">Sign in</button>
           <button id="ty-signup" type="button">Create account</button>
-          <button id="ty-google" type="button">Continue with Google</button>
+          <button id="ty-google" type="button">Sign up / continue with Google</button>
         </div>
       </div>
     </div>`;
-  document.body.appendChild(wrap);
+  const target = document.getElementById("auth-form-slot") || document.body;
+  target.appendChild(wrap);
 
   const modal=document.getElementById("ty-auth-modal");
   document.getElementById("ty-login-btn").onclick=()=>modal.hidden=false;
