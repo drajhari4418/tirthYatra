@@ -4592,7 +4592,7 @@ hr + .footer-social-list {
 * Page layout
 */
 .page {
-	position: relative;
+	position: fixed;
 	text-align: center;
 	overflow: hidden;
 	min-height: 100vh;
