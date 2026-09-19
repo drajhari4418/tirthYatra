@@ -1,0 +1,95 @@
+{
+  "note": "Firebase Realtime Database uses JSON nodes, not SQL tables. These are the TirthYatra application nodes and record shapes.",
+  "schema": {
+    "users": {
+      "uid": {
+        "name": "",
+        "email": "",
+        "photoURL": "",
+        "provider": "password|google.com",
+        "role": "user|admin",
+        "createdAt": "timestamp",
+        "lastLoginAt": "timestamp"
+      }
+    },
+    "prasads": {
+      "prasadId": {
+        "name": "",
+        "description": "",
+        "price": 0,
+        "image": "",
+        "available": true,
+        "createdAt": "timestamp",
+        "updatedAt": "timestamp"
+      }
+    },
+    "temples": {
+      "templeId": {
+        "name": "",
+        "city": "",
+        "state": "",
+        "description": "",
+        "image": "",
+        "createdAt": "timestamp",
+        "updatedAt": "timestamp"
+      }
+    },
+    "templeVisits": {
+      "uid": {
+        "visitId": {
+          "userId": "uid",
+          "templeId": "",
+          "templeName": "",
+          "visitDate": "YYYY-MM-DD",
+          "createdAt": "timestamp"
+        }
+      }
+    },
+    "services": {
+      "serviceId": {
+        "title": "",
+        "description": "",
+        "image": "",
+        "createdAt": "timestamp"
+      }
+    },
+    "places": {
+      "placeId": {
+        "name": "",
+        "description": "",
+        "image": "",
+        "createdAt": "timestamp"
+      }
+    },
+    "posts": {
+      "postId": {
+        "title": "",
+        "body": "",
+        "image": "",
+        "createdAt": "timestamp"
+      }
+    },
+    "content": {
+      "contentId": {
+        "title": "",
+        "body": "",
+        "image": "",
+        "createdAt": "timestamp"
+      }
+    },
+    "contactMessages": {
+      "messageId": {
+        "name": "",
+        "email": "",
+        "message": "",
+        "createdAt": "timestamp"
+      }
+    },
+    "newsletter": {
+      "subscriptionId": {
+        "email": "",
+        "createdAt": "timestamp"
+      }
+    }
+  }
+}
