@@ -66,6 +66,21 @@
         .rd-navbar-brand .brand::before{width:32px;height:32px;font-size:19px;margin-right:6px;}
         .rd-navbar-brand .brand::after{font-size:18px;}
       }
+      /* Keep the header fixed at the very top while scrolling */
+      header.page-header{
+        position:relative!important;
+        z-index:10000!important;
+      }
+      .rd-navbar-wrap{
+        position:relative!important;
+      }
+      .rd-navbar.rd-navbar--is-stuck{
+        position:fixed!important;
+        top:0!important;
+        left:0!important;
+        right:0!important;
+        z-index:10001!important;
+      }
       /* Remove unwanted gap between navigation header and hero slider */
       header.page-header, header{margin:0!important;padding:0!important;}
       header.page-header.section{min-height:0!important;}
