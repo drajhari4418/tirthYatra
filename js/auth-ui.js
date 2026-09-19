@@ -69,6 +69,7 @@ onAuthStateChanged(auth, async user => {
         document.querySelector(".ty-auth-bar")?.appendChild(a);
       }
     } catch(e) { console.error("Profile sync failed",e); }
+    if (location.pathname.endsWith("/auth.html") || location.pathname.endsWith("/auth")) location.replace("index.html");
   } else {
     label.textContent="Guest"; login.hidden=false; logout.hidden=true;
   }
