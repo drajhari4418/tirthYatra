@@ -18,7 +18,7 @@ onAuthStateChanged(auth, user=>{
   currentUser=user;
   if(!user){status.innerHTML='Please <a href="auth.html">sign in</a> to record and view your temple visits.'; form.hidden=true; history.innerHTML=""; return;}
   form.hidden=false; status.textContent="Your visits are private to your account.";
-  onValue(ref(db,`templeVisits`),snap=>{
+  onValue(ref(db,`templeVisits/${user.uid}`),snap=>{
     const all=snap.val()||{};
     const visits=Object.entries(all).map(([id,v])=>({id,...v})).filter(v=>v.userId===user.uid).sort((a,b)=>(b.visitDate||"").localeCompare(a.visitDate||""));
     history.innerHTML=visits.length?visits.map(v=>`<li><strong>${esc(v.templeName||v.templeId)}</strong> — ${esc(v.visitDate||"")}<br><small>Recorded ${new Date(v.createdAt||Date.now()).toLocaleString()}</small></li>`).join(""):"<li>No temple visits recorded yet.</li>";
@@ -31,8 +31,8 @@ form.addEventListener("submit",async e=>{
   const templeId=templeSelect.value;
   const visitDate=document.getElementById("visit-date").value;
   if(!templeId||!visitDate)return;
-  const id=push(ref(db,"templeVisits")).key;
-  await set(ref(db,`templeVisits/${id}`),{
+  const id=push(push(ref(db,`templeVisits/${currentUser.uid}`)).key;
+  await set(ref(db,`templeVisits/${currentUser.uid}/${id}`),{
     userId:currentUser.uid,
     templeId,
     templeName:temples[templeId]?.name||templeId,
