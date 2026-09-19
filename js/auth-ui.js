@@ -26,6 +26,7 @@ function mountAuthUI() {
           <button id="ty-signup" type="button">Create account</button>
           <button id="ty-google" type="button">Sign up / continue with Google</button>
         </div>
+        <button id="ty-switch-auth" type="button" style="margin-top:8px;background:transparent;color:#9f4318;padding:4px 0">Already have an account? Sign in</button>
       </div>
     </div>`;
   const target = document.getElementById("auth-form-slot") || document.body;
@@ -36,26 +37,34 @@ function mountAuthUI() {
   const signinBtn=document.getElementById("ty-signin");
   const signupBtn=document.getElementById("ty-signup");
   const googleBtn=document.getElementById("ty-google");
+  const switchBtn=document.getElementById("ty-switch-auth");
   const email=()=>document.getElementById("ty-auth-email").value.trim();
   const password=()=>document.getElementById("ty-auth-password").value;
   const error=e=>document.getElementById("ty-auth-error").textContent=e?.message?.replace("Firebase: ","") || String(e);
 
+  let mode="signup";
   const showLogin=()=>{
+    mode="login";
     nameInput.style.display="none";
+    signinBtn.style.display="";
     signupBtn.style.display="none";
     googleBtn.textContent="Continue with Google";
-    signinBtn.textContent="Sign in";
+    switchBtn.textContent="New here? Create an account";
     error("");
   };
   const showSignup=()=>{
+    mode="signup";
     nameInput.style.display="";
+    signinBtn.style.display="none";
     signupBtn.style.display="";
     googleBtn.textContent="Sign up / continue with Google";
-    signinBtn.textContent="Sign in";
+    switchBtn.textContent="Already have an account? Sign in";
     error("");
   };
 
   document.getElementById("ty-login-btn").onclick=()=>{modal.hidden=false;showLogin();};
+  switchBtn.onclick=()=>mode==="login"?showSignup():showLogin();
+
   signinBtn.onclick=async()=>{
     const e=email(), p=password();
     if(!e || !p){ error("Please enter your email and password."); return; }
@@ -74,9 +83,12 @@ function mountAuthUI() {
       }
     }
   };
+
   signupBtn.onclick=async()=>{
+    const e=email(), p=password();
+    if(!e || !p){ error("Please enter your email and password."); return; }
     try{
-      const c=await createUserWithEmailAndPassword(auth,email(),password());
+      const c=await createUserWithEmailAndPassword(auth,e,p);
       const n=nameInput.value.trim();
       if(n) await updateProfile(c.user,{displayName:n});
       try { await ensureUserProfile(c.user); } catch(e) { console.error("Profile creation failed after successful signup:", e); }
@@ -91,6 +103,7 @@ function mountAuthUI() {
       }
     }
   };
+
   googleBtn.onclick=async()=>{
     try{
       const r=await signInWithPopup(auth,googleProvider);
@@ -99,20 +112,8 @@ function mountAuthUI() {
       location.replace("index.html");
     }catch(e){error(e)}
   };
-  document.getElementById("ty-signup").onclick=async()=>{try{
-    const c=await createUserWithEmailAndPassword(auth,email(),password());
-    const n=document.getElementById("ty-auth-name").value.trim();
-    if(n) await updateProfile(c.user,{displayName:n});
-    try { await ensureUserProfile(c.user); } catch(e) { console.error("Profile creation failed after successful signup:", e); }
-    modal.hidden=true;
-    location.replace("index.html");
-  }catch(e){error(e)}};
-  document.getElementById("ty-google").onclick=async()=>{try{
-    const r=await signInWithPopup(auth,googleProvider);
-    await ensureUserProfile(r.user);
-    modal.hidden=true;
-  }catch(e){error(e)}};
-  document.getElementById("ty-logout-btn").onclick=()=>signOut(auth);
+
+  document.getElementById("ty-logout-btn").onclick=()=>signOut(auth);\n  showSignup();
 }
 
 mountAuthUI();
