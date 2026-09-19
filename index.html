@@ -185,6 +185,7 @@
 .ty-gallery-label{font-size:10px;font-weight:700;color:#fff;text-shadow:0 1px 5px #000}
 .ty-gallery-credit{margin:10px 0 0;font-size:9px;line-height:1.35;color:rgba(255,255,255,.62)}
 </style>
+    <link rel="stylesheet" href="css/header-scroll.css">
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
@@ -244,17 +245,17 @@
                   <div class="rd-navbar-main">
                     <!-- RD Navbar Nav-->
                     <ul class="rd-navbar-nav">
-                      <li class="rd-nav-item active"><a class="rd-nav-link" href="#">Packages</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="#packages">Packages</a>
                       </li>
 
-                      <li class="rd-nav-item "><a class="rd-nav-link" href="#">Services</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="#services">Services</a>
                       </li>
 
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="#">About us</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="about-us.html">About us</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="#">Blog</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="#reviews">Blog</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="#">Contact</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="#contact">Contact</a>
                       </li>
                     </ul>
                   </div>
@@ -398,6 +399,7 @@
         </div>
       </section>
       <!-- Dynamic Services -->
+      <span id="services" class="ty-anchor"></span>
       <section class="section section-md bg-default">
         <div class="container">
           <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Our services</span></h3>
@@ -408,6 +410,7 @@
       </section>
 
       <!-- Section CTA-->
+      <span id="packages" class="ty-anchor"></span>
       <section class="primary-overlay section parallax-container" data-parallax-img="images/best-destination.jfif">
         <div class="parallax-content section-xl context-dark text-md-left">
           <div class="container">
@@ -519,6 +522,7 @@
       </section>
 
       <!-- What We Offer-->
+      <span id="reviews" class="ty-anchor"></span>
       <section class="section section-xl bg-default">
         <div class="container">
           <h3 class="wow fadeInLeft">What People Say</h3>
@@ -583,6 +587,7 @@
                
 
       <!-- Tell-->
+      <span id="contact" class="ty-anchor"></span>
       <section class="section section-sm section-first bg-default">
         <div class="container">
           <h3 class="heading-3">Book your Slot</h3>
@@ -762,28 +767,7 @@
     <script src="js/script.js"></script>
     <!-- coded by Himic-->
     <script type="module" src="js/site-init.js"></script>
-  <script>
-    (function(){
-      function syncTirthYatraHeaderHeight(){
-        var header=document.querySelector('header.page-header');
-        if(!header) return;
-        var h=header.getBoundingClientRect().height;
-        if(h>0) document.documentElement.style.setProperty('--ty-header-height',h+'px');
-      }
-      window.addEventListener('load',syncTirthYatraHeaderHeight);
-      window.addEventListener('resize',syncTirthYatraHeaderHeight);
-      if(window.ResizeObserver){
-        var ro=new ResizeObserver(syncTirthYatraHeaderHeight);
-        window.addEventListener('DOMContentLoaded',function(){
-          var header=document.querySelector('header.page-header');
-          if(header) ro.observe(header);
-          syncTirthYatraHeaderHeight();
-        });
-      } else {
-        window.addEventListener('DOMContentLoaded',syncTirthYatraHeaderHeight);
-      }
-    })();
-  </script>
+  <script src="js/header-scroll.js"></script>
   <script type="module" src="js/auth-ui.js"></script>
   </body>
 </html>

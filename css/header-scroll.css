@@ -1,0 +1,164 @@
+/* ==========================================================================
+   TirthYatra – scroll-aware header
+   Loaded AFTER css/style.css (and after any inline <style> in the page).
+
+   States (classes toggled on header.page-header by js/header-scroll.js):
+     .ty-header--compact  page scrolled a little  -> header shrinks, stronger shadow
+     .ty-header--hidden   scrolling down          -> header slides out of view
+   Scrolling up brings the header straight back.
+   ========================================================================== */
+
+/* ---- 1. Fixed header base (same rules index.html already had inline, so
+        about-us / contacts / typography now behave identically) ------------ */
+:root { --ty-header-height: 76px; }   /* js/header-scroll.js keeps this in sync */
+
+html { scroll-padding-top: var(--ty-header-height); }
+
+/* In-page menu links (Services, Contact, ...).
+   RD Navbar animates the scroll itself and ignores scroll-padding, so each target section has a
+   zero-height marker (<span class="ty-anchor" id="...">) placed just above it. The marker sits one
+   header-height higher, which makes the section land right below the header. */
+.ty-anchor {
+  display: block;
+  height: 0;
+  position: relative;
+  top: calc(-1 * var(--ty-header-height));
+  visibility: hidden;
+  pointer-events: none;
+}
+html { scroll-padding-top: 0; }
+
+header.page-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 1075 !important;       /* above page sections, below the lightGallery overlay (1080+) */
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #fff !important;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, .10) !important;
+  transition: box-shadow .25s ease, transform .3s ease;
+}
+header.page-header.section { min-height: 0 !important; }
+header.page-header .rd-navbar,
+header.page-header .rd-navbar-inner-outer,
+header.page-header .rd-navbar-inner { background: #fff !important; }
+
+/* css/style.css makes .page position:fixed + min-height:100vh. That (a) put the header
+   underneath the page sections instead of on top of them, and (b) on about-us / contacts /
+   typography made the page impossible to scroll. A normal block fixes both. */
+.page {
+  position: static !important;
+  min-height: 0 !important;
+  padding-top: var(--ty-header-height) !important;
+}
+
+.rd-navbar-wrap {
+  position: relative !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+.rd-navbar,
+.rd-navbar-wrap { margin-bottom: 0 !important; }
+.rd-navbar.rd-navbar--is-stuck { position: static !important; top: auto !important; }
+.rd-navbar-modern.rd-navbar-static .rd-navbar-panel { margin-bottom: 0 !important; }
+
+/* ---- 2. Compact state ------------------------------------------------------ */
+header.page-header.ty-header--compact {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .16) !important;
+}
+
+/* smooth the shrink (desktop / "static" navbar layout) */
+.rd-navbar-modern.rd-navbar-static .rd-navbar-panel,
+.rd-navbar-modern.rd-navbar-static .rd-nav-link,
+.rd-navbar-modern.rd-navbar-static .rd-navbar-project-hamburger-open {
+  transition: padding .25s ease, bottom .25s ease;
+}
+.rd-navbar-brand .brand::before,
+.rd-navbar-brand .brand::after {
+  transition: width .25s ease, height .25s ease, font-size .25s ease, margin .25s ease;
+}
+
+header.page-header.ty-header--compact .rd-navbar-modern.rd-navbar-static .rd-navbar-panel {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+header.page-header.ty-header--compact .rd-navbar-modern.rd-navbar-static .rd-nav-link {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+header.page-header.ty-header--compact .rd-navbar-modern.rd-navbar-static .rd-navbar-project-hamburger-open {
+  bottom: 12px;
+}
+@media (min-width: 1200px) {
+  header.page-header.ty-header--compact .rd-navbar-modern.rd-navbar-static .rd-nav-link {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  header.page-header.ty-header--compact .rd-navbar-modern.rd-navbar-static .rd-navbar-project-hamburger-open {
+    bottom: 14px;
+  }
+}
+
+/* pages with the phone / address / social strip above the menu: fold it away, like the theme does
+   for its own "stuck" navbar */
+.rd-navbar-modern.rd-navbar-static .rd-navbar-aside {
+  overflow: hidden;
+  max-height: 120px;
+  transition: max-height .25s ease, opacity .2s ease;
+}
+header.page-header.ty-header--compact .rd-navbar-modern.rd-navbar-static .rd-navbar-aside {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* text logo (index.html) and image logo (other pages) get a little smaller */
+header.page-header.ty-header--compact .rd-navbar-brand .brand::before {
+  width: 34px;
+  height: 34px;
+  font-size: 20px;
+  margin-right: 8px;
+}
+header.page-header.ty-header--compact .rd-navbar-brand .brand::after { font-size: 21px; }
+header.page-header.ty-header--compact .rd-navbar-modern.rd-navbar-static .rd-navbar-brand img {
+  max-width: 150px;
+}
+
+/* ---- 3. Hidden state ------------------------------------------------------- */
+/* Uses the measured header height, so it works for both the desktop navbar and
+   the mobile one (whose panel is position:fixed inside the header).
+   No transform is set in the resting state, so fixed-position menus inside the
+   header keep behaving exactly as before. */
+header.page-header.ty-header--hidden {
+  transform: translateY(calc(-1 * (var(--ty-header-height) + 24px)));
+}
+/* keep the header on screen while someone is tabbing through it */
+header.page-header.ty-header--hidden:has(:focus-visible) { transform: none; }
+
+/* ---- 4. Floating login / "Prasads · Temple Visits" pills (injected by js/auth-ui.js)
+        They sit on top of the header, so they follow it. ------------------------------ */
+@media (min-width: 601px) {
+  html.ty-header--compact .ty-auth-bar,
+  html.ty-header--compact .ty-auth-service-links { top: 5px; }
+}
+html.ty-header--hidden .ty-auth-bar,
+html.ty-header--hidden .ty-auth-service-links { transform: translateY(-120px); }
+html.ty-header--hidden .ty-auth-bar:has(:focus-visible),
+html.ty-header--hidden .ty-auth-service-links:has(:focus-visible) { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  header.page-header,
+  .rd-navbar-modern.rd-navbar-static .rd-navbar-panel,
+  .rd-navbar-modern.rd-navbar-static .rd-nav-link,
+  .rd-navbar-modern.rd-navbar-static .rd-navbar-project-hamburger-open,
+  .rd-navbar-modern.rd-navbar-static .rd-navbar-aside,
+  .rd-navbar-brand .brand::before,
+  .rd-navbar-brand .brand::after,
+  .ty-auth-bar,
+  .ty-auth-service-links { transition: none; }
+}
