@@ -12,7 +12,7 @@ function mountAuthUI() {
       .ty-auth-right{display:flex;align-items:center;gap:5px}
       .ty-auth-user{display:flex;align-items:center;gap:5px}
       .ty-auth-service-links{position:fixed;top:14px;left:18px;z-index:10001;display:flex;align-items:center;gap:6px;padding:6px;background:rgba(255,250,242,.94);backdrop-filter:blur(10px);border:1px solid #eadbc8;border-radius:16px;box-shadow:0 8px 28px rgba(74,40,12,.18)}
-      .ty-auth-service-links a{display:inline-flex;align-items:center;gap:5px;border:1px solid #eadbc8;border-radius:11px;padding:7px 10px;background:#fff;color:#713b19;text-decoration:none;font:650 13px system-ui;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,color .2s ease}
+      .ty-auth-service-links[hidden]{display:none!important}.ty-auth-service-links a{display:inline-flex;align-items:center;gap:5px;border:1px solid #eadbc8;border-radius:11px;padding:7px 10px;background:#fff;color:#713b19;text-decoration:none;font:650 13px system-ui;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,color .2s ease}
       .ty-auth-service-links a:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(113,59,25,.16);background:#fff3df;color:#9b4b18}
       .ty-auth-service-links a:first-of-type:before{content:"🪔";font-size:14px}
       .ty-auth-service-links a:nth-of-type(2):before{content:"🛕";font-size:14px}
@@ -143,7 +143,9 @@ mountAuthUI();
 onAuthStateChanged(auth, async user => {
   const label=document.getElementById("ty-user-label"), login=document.getElementById("ty-login-btn"), logout=document.getElementById("ty-logout-btn");
   if(!label) return;
+  const serviceLinks=document.querySelector(".ty-auth-service-links");
   if(user){
+    if(serviceLinks) serviceLinks.hidden=false;
     label.textContent=user.displayName || user.email || "Signed in";
     login.hidden=true; logout.hidden=false;
     document.querySelector(".ty-auth-right")?.style.setProperty("order","2");
@@ -151,6 +153,7 @@ onAuthStateChanged(auth, async user => {
 try { await ensureUserProfile(user); } catch(e) { console.error("Profile sync failed",e); }
     if (location.pathname.endsWith("/auth.html") || location.pathname.endsWith("/auth")) location.replace("index.html");
   } else {
+    if(serviceLinks) serviceLinks.hidden=true;
     label.textContent="Guest"; login.hidden=false; logout.hidden=true;
   }
 });
