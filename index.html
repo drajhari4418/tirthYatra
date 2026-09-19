@@ -34,7 +34,22 @@
         width:100%;
         text-decoration:none;
       }
-      .rd-navbar-brand .brand-logo-dark{display:none!important;}
+      .rd-navbar-brand .brand-logo-dark{
+        display:none!important;
+        width:0!important;
+        height:0!important;
+        max-width:0!important;
+        max-height:0!important;
+        visibility:hidden!important;
+        opacity:0!important;
+        position:absolute!important;
+        pointer-events:none!important;
+      }
+      .rd-navbar-brand .brand{
+        position:relative!important;
+        overflow:visible!important;
+        white-space:nowrap!important;
+      }
       .rd-navbar-brand .brand::before{
         content:"ॐ";
         display:inline-flex;
@@ -51,6 +66,7 @@
       }
       .rd-navbar-brand .brand::after{
         content:"TirthYatra";
+        display:inline-block!important;
         color:#7c2d12;
         font:800 25px/1.05 Raleway,Arial,sans-serif;
         letter-spacing:-.5px;
