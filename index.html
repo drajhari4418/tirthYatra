@@ -43,7 +43,18 @@
       .swiper-slider-3 .swiper-text{
         font-weight:500;
       }
-    </style>
+    </style><style>
+.ty-gallery-intro{display:flex;flex-direction:column;gap:2px;margin:0 0 10px;color:#fff}
+.ty-gallery-intro strong{font-size:18px;line-height:1.2}
+.ty-gallery-intro span{font-size:11px;opacity:.78}
+.ty-gallery-categories{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}
+.ty-gallery-categories span{font-size:9px;line-height:1;padding:5px 7px;border:1px solid rgba(255,255,255,.28);border-radius:20px;color:#fff;background:rgba(255,255,255,.08)}
+.ty-gallery-item .thumbnail-creative{overflow:hidden}
+.ty-gallery-item img{width:100%!important;height:150px!important;object-fit:cover;display:block}
+.ty-gallery-item .thumbnail-creative-caption{display:flex!important;align-items:center;justify-content:space-between;padding:7px!important}
+.ty-gallery-label{font-size:10px;font-weight:700;color:#fff;text-shadow:0 1px 5px #000}
+.ty-gallery-credit{margin:10px 0 0;font-size:9px;line-height:1.35;color:rgba(255,255,255,.62)}
+</style>
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
@@ -153,51 +164,48 @@
                   </div>
                   <div class="rd-navbar-project-content rd-navbar-content">
                     <div>
+                      <div class="ty-gallery-intro">
+                        <strong>Sacred India Gallery</strong>
+                        <span>HD pilgrimage moments by tradition and place</span>
+                      </div>
+                      <div class="ty-gallery-categories">
+                        <span>Hindu</span><span>Sikh</span><span>Jain</span><span>Buddhist</span><span>Ghats &amp; Yatra</span>
+                      </div>
                       <div class="row gutters-20" data-lightgallery="group">
-                        <div class="col-6">
-                          <!-- Thumbnail Creative-->
-                          <article class="thumbnail thumbnail-creative"><a href="images/random1.jpg" data-lightgallery="item">
-                              <div class="thumbnail-creative-figure"><img src="images/random1.jpg" alt="" width="195" height="164"/>
-                              </div>
-                              <div class="thumbnail-creative-caption"><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
+                        <div class="col-6 ty-gallery-item">
+                          <article class="thumbnail thumbnail-creative"><a href="https://commons.wikimedia.org/wiki/Special:FilePath/Kedarnath%20Temple.jpg" data-lightgallery="item">
+                            <div class="thumbnail-creative-figure"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kedarnath%20Temple.jpg" alt="Kedarnath Temple, Uttarakhand — Hindu pilgrimage" width="195" height="164" loading="lazy"/></div>
+                            <div class="thumbnail-creative-caption"><span class="ty-gallery-label">Hindu</span><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
                         </div>
-                        <div class="col-6">
-                          <!-- Thumbnail Creative-->
-                          <article class="thumbnail thumbnail-creative"><a href="images/random2.jfif" data-lightgallery="item">
-                              <div class="thumbnail-creative-figure"><img src="images/random2.jfif" alt="" width="195" height="164"/>
-                              </div>
-                              <div class="thumbnail-creative-caption"><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
+                        <div class="col-6 ty-gallery-item">
+                          <article class="thumbnail thumbnail-creative"><a href="https://commons.wikimedia.org/wiki/Special:FilePath/Golden%20Temple%204000.jpg" data-lightgallery="item">
+                            <div class="thumbnail-creative-figure"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Golden%20Temple%204000.jpg" alt="Golden Temple, Amritsar — Sikh pilgrimage" width="195" height="164" loading="lazy"/></div>
+                            <div class="thumbnail-creative-caption"><span class="ty-gallery-label">Sikh</span><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
                         </div>
-                        <div class="col-6">
-                          <!-- Thumbnail Creative-->
-                          <article class="thumbnail thumbnail-creative"><a href="images/random4.jfif" data-lightgallery="item">
-                              <div class="thumbnail-creative-figure"><img src="images/random4.jfif" alt="" width="195" height="164"/>
-                              </div>
-                              <div class="thumbnail-creative-caption"><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
+                        <div class="col-6 ty-gallery-item">
+                          <article class="thumbnail thumbnail-creative"><a href="https://commons.wikimedia.org/wiki/Special:FilePath/RanakpurJainTemple.jpg" data-lightgallery="item">
+                            <div class="thumbnail-creative-figure"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/RanakpurJainTemple.jpg" alt="Ranakpur Jain Temple, Rajasthan — Jain pilgrimage" width="195" height="164" loading="lazy"/></div>
+                            <div class="thumbnail-creative-caption"><span class="ty-gallery-label">Jain</span><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
                         </div>
-                        <div class="col-6">
-                          <!-- Thumbnail Creative-->
-                          <article class="thumbnail thumbnail-creative"><a href="images/random6.jfif" data-lightgallery="item">
-                              <div class="thumbnail-creative-figure"><img src="images/random6.jfif" alt="" width="195" height="164"/>
-                              </div>
-                              <div class="thumbnail-creative-caption"><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
+                        <div class="col-6 ty-gallery-item">
+                          <article class="thumbnail thumbnail-creative"><a href="https://commons.wikimedia.org/wiki/Special:FilePath/Mahabodhi%20Temple%2C%20Bodh%20Gaya%2C%20Bihar%2C%20India.jpg" data-lightgallery="item">
+                            <div class="thumbnail-creative-figure"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mahabodhi%20Temple%2C%20Bodh%20Gaya%2C%20Bihar%2C%20India.jpg" alt="Mahabodhi Temple, Bodh Gaya — Buddhist pilgrimage" width="195" height="164" loading="lazy"/></div>
+                            <div class="thumbnail-creative-caption"><span class="ty-gallery-label">Buddhist</span><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
                         </div>
-                        <div class="col-6">
-                          <!-- Thumbnail Creative-->
-                          <article class="thumbnail thumbnail-creative"><a href="images/random7.jfif" data-lightgallery="item">
-                              <div class="thumbnail-creative-figure"><img src="images/random7.jfif" alt="" width="195" height="164"/>
-                              </div>
-                              <div class="thumbnail-creative-caption"><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
+                        <div class="col-6 ty-gallery-item">
+                          <article class="thumbnail thumbnail-creative"><a href="https://commons.wikimedia.org/wiki/Special:FilePath/Ghats%20of%20Varanasi...JPG" data-lightgallery="item">
+                            <div class="thumbnail-creative-figure"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ghats%20of%20Varanasi...JPG" alt="Ghats of Varanasi — Ganga pilgrimage" width="195" height="164" loading="lazy"/></div>
+                            <div class="thumbnail-creative-caption"><span class="ty-gallery-label">Ghats &amp; Yatra</span><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
                         </div>
-                        <div class="col-6">
-                          <!-- Thumbnail Creative-->
-                          <article class="thumbnail thumbnail-creative"><a href="images/random1.jpg" data-lightgallery="item">
-                              <div class="thumbnail-creative-figure"><img src="images/random1.jpg" alt="" width="195" height="164"/>
-                              </div>
-                              <div class="thumbnail-creative-caption"><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
+                        <div class="col-6 ty-gallery-item">
+                          <article class="thumbnail thumbnail-creative"><a href="https://commons.wikimedia.org/wiki/Special:FilePath/Kedarnath%20temple%20view.jpg" data-lightgallery="item">
+                            <div class="thumbnail-creative-figure"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kedarnath%20temple%20view.jpg" alt="Kedarnath pilgrimage landscape — Hindu yatra" width="195" height="164" loading="lazy"/></div>
+                            <div class="thumbnail-creative-caption"><span class="ty-gallery-label">Hindu Yatra</span><span class="icon thumbnail-creative-icon linearicons-magnifier"></span></div></a></article>
                         </div>
                       </div>
+                      <p class="ty-gallery-credit">HD images: Wikimedia Commons. Open any image to view it full size.</p>
                     </div>
+                  </div>
                   </div>
                 </div>
               </div>
