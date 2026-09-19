@@ -135,7 +135,7 @@ function mountAuthUI() {
   };
 
   document.getElementById("ty-logout-btn").onclick=()=>signOut(auth);
-  showSignup();
+  showLogin();
 }
 
 mountAuthUI();
