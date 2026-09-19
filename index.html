@@ -67,6 +67,35 @@
         .rd-navbar-brand .brand::after{font-size:18px;}
       }
       /* Fixed header: keep it at the top without RDNavbar sticky clones/overlap */
+      html{scroll-padding-top:var(--ty-header-height);}
+      body{overflow-x:hidden;}
+      header.page-header{
+        background:#fff!important;
+        box-shadow:0 2px 14px rgba(0,0,0,.10)!important;
+      }
+      header.page-header .rd-navbar,
+      header.page-header .rd-navbar-inner-outer,
+      header.page-header .rd-navbar-inner{
+        background:#fff!important;
+      }
+      header.page-header .rd-navbar,
+      header.page-header .rd-navbar-inner-outer,
+      header.page-header .rd-navbar-inner,
+      header.page-header .rd-navbar-wrap{
+        transform:none!important;
+      }
+      header.page-header .rd-navbar-wrap{
+        overflow:visible!important;
+      }
+      .page > *:not(.page-header){
+        position:relative;
+        z-index:1;
+      }
+      header.page-header{z-index:10000!important;}
+      .section[id], section[id], [id*="prasad"]{
+        scroll-margin-top:calc(var(--ty-header-height) + 12px);
+      }
+      
       :root{--ty-header-height:76px;}
       header.page-header{
         position:fixed!important;
