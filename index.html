@@ -12,6 +12,38 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+      /* HD pilgrimage slider backgrounds + stronger text contrast */
+      .swiper-slider-3 .swiper-slide{
+        background-size:cover!important;
+        background-position:center center!important;
+        background-repeat:no-repeat!important;
+        position:relative;
+      }
+      .swiper-slider-3 .swiper-slide::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        z-index:0;
+        background:linear-gradient(90deg,rgba(0,0,0,.58) 0%,rgba(0,0,0,.28) 48%,rgba(0,0,0,.08) 100%);
+        pointer-events:none;
+      }
+      .swiper-slider-3 .swiper-slide-caption{
+        position:relative;
+        z-index:1;
+      }
+      .swiper-slider-3 .swiper-title,
+      .swiper-slider-3 .swiper-text{
+        text-shadow:0 3px 12px rgba(0,0,0,.8);
+      }
+      .swiper-slider-3 .swiper-title{
+        font-weight:800;
+        letter-spacing:.02em;
+      }
+      .swiper-slider-3 .swiper-text{
+        font-weight:500;
+      }
+    </style>
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
@@ -176,7 +208,7 @@
       <!-- Swiper-->
       <section class="section swiper-container swiper-slider swiper-slider-2 swiper-slider-3" data-loop="true" data-autoplay="5000" data-simulate-touch="false" data-slide-effect="fade">
         <div class="swiper-wrapper text-sm-left">
-          <div class="swiper-slide context-dark" data-slide-bg="images/slide1.jfif">
+          <div class="swiper-slide context-dark" data-slide-bg="https://commons.wikimedia.org/wiki/Special:FilePath/Ram%20mandir%20picture.jpg">
             <div class="swiper-slide-caption section-md">
               <div class="container">
                 <div class="row">
@@ -189,7 +221,7 @@
             </div>
           </div>
 
-          <div class="swiper-slide context-dark" data-slide-bg="images/slide3.jfif">
+          <div class="swiper-slide context-dark" data-slide-bg="https://commons.wikimedia.org/wiki/Special:FilePath/Amritsar-%20The%20Golden%20Temple.jpg">
             <div class="swiper-slide-caption section-md">
               <div class="container">
                 <div class="row">
@@ -202,7 +234,7 @@
             </div>
           </div>
 
-          <div class="swiper-slide context-dark" data-slide-bg="images/slide2.jpg">
+          <div class="swiper-slide context-dark" data-slide-bg="https://commons.wikimedia.org/wiki/Special:FilePath/Ranakpur%20Jain%20Temple%20%2854340858042%29.jpg">
             <div class="swiper-slide-caption section-md">
               <div class="container">
                 <div class="row">
