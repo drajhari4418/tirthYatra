@@ -8,12 +8,12 @@ function mountAuthUI() {
   wrap.id = "ty-auth-ui";
   wrap.innerHTML = `
     <div class="ty-auth-bar" style="position:fixed;top:12px;right:16px;z-index:10000;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;background:#fff8ee;border:1px solid #eadbc8;border-radius:10px;box-shadow:0 4px 14px rgba(74,40,12,.12);font:13px system-ui">
-      <span id="ty-user-label">Guest</span>
-      <button id="ty-login-btn" type="button">Login</button>
       <button id="ty-logout-btn" type="button" hidden>Logout</button>
-      <span class="ty-auth-links" style="display:flex;align-items:center;gap:8px">
+      <span class="ty-auth-right" style="display:flex;align-items:center;gap:8px;margin-left:auto">
+        <span id="ty-user-label">Guest</span>
         <a href="prasads.html">Prasads</a>
         <a href="temple-visits.html">Temple Visits</a>
+        <button id="ty-login-btn" type="button">Login</button>
       </span>
     </div>
     <div id="ty-auth-modal" class="ty-auth-modal" hidden style="position:fixed;inset:0;background:#0008;z-index:9999;padding:30px">
@@ -127,9 +127,9 @@ onAuthStateChanged(auth, async user => {
   if(user){
     label.textContent=user.displayName || user.email || "Signed in";
     login.hidden=true; logout.hidden=false;
-    document.querySelector(".ty-auth-links")?.style.setProperty("order","3");
+    document.querySelector(".ty-auth-right")?.style.setProperty("order","2");
     logout.style.order="1";
-    logout.style.marginRight="auto";
+    logout.style.marginRight="0";
     try {
       const profile=await ensureUserProfile(user);
       if(profile?.role==="admin" && !document.querySelector('a[href="admin.html"]')) {
