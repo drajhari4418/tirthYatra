@@ -37,7 +37,22 @@ function mountAuthUI() {
   const password=()=>document.getElementById("ty-auth-password").value;
   const error=e=>document.getElementById("ty-auth-error").textContent=e?.message?.replace("Firebase: ","") || String(e);
 
-  document.getElementById("ty-signin").onclick=async()=>{try{await signInWithEmailAndPassword(auth,email(),password());modal.hidden=true}catch(e){error(e)}};
+  document.getElementById("ty-signin").onclick=async()=>{try{
+    const e=email(), p=password();
+    if(!e || !p){ error("Please enter your email and password."); return; }
+    await signInWithEmailAndPassword(auth,e,p);
+    modal.hidden=true;
+    location.replace("index.html");
+  }catch(e){
+    const code=e?.code || "";
+    if(code==="auth/user-not-found" || code==="auth/invalid-credential" || code==="auth/invalid-login-credentials"){
+      error("Account not found. Please create an account first.");
+    } else if(code==="auth/wrong-password"){
+      error("Incorrect password. Please try again.");
+    } else {
+      error(e);
+    }
+  }};
   document.getElementById("ty-signup").onclick=async()=>{try{
     const c=await createUserWithEmailAndPassword(auth,email(),password());
     const n=document.getElementById("ty-auth-name").value.trim();
