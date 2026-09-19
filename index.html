@@ -13,9 +13,54 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-      /* Lower TirthYatra logo slightly for balanced top navigation */
-      .rd-navbar-brand{transform:translateY(18px);}
-      @media(max-width:767px){.rd-navbar-brand{transform:translateY(12px);}}
+      /* New compact TirthYatra navbar logo — keeps clear space from Prasads/Temple Visits */
+      .rd-navbar-brand{
+        transform:none!important;
+        width:230px!important;
+        min-width:230px!important;
+        margin-left:92px!important;
+        position:relative;
+        z-index:2;
+      }
+      .rd-navbar-brand .brand{
+        display:flex!important;
+        align-items:center;
+        justify-content:flex-start;
+        width:100%;
+        text-decoration:none;
+      }
+      .rd-navbar-brand .brand-logo-dark{display:none!important;}
+      .rd-navbar-brand .brand::before{
+        content:"ॐ";
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        width:42px;
+        height:42px;
+        margin-right:10px;
+        border-radius:50%;
+        background:linear-gradient(135deg,#d97706,#9a3412);
+        color:#fff;
+        font:700 24px/1 Georgia,serif;
+        box-shadow:0 5px 16px rgba(154,52,18,.24);
+      }
+      .rd-navbar-brand .brand::after{
+        content:"TirthYatra";
+        color:#7c2d12;
+        font:800 25px/1.05 Raleway,Arial,sans-serif;
+        letter-spacing:-.5px;
+        text-shadow:0 2px 8px rgba(124,45,18,.12);
+      }
+      @media(max-width:991px){
+        .rd-navbar-brand{margin-left:76px!important;width:205px!important;min-width:205px!important;}
+        .rd-navbar-brand .brand::before{width:36px;height:36px;font-size:21px;margin-right:7px;}
+        .rd-navbar-brand .brand::after{font-size:21px;}
+      }
+      @media(max-width:767px){
+        .rd-navbar-brand{margin-left:64px!important;width:185px!important;min-width:185px!important;}
+        .rd-navbar-brand .brand::before{width:32px;height:32px;font-size:19px;margin-right:6px;}
+        .rd-navbar-brand .brand::after{font-size:18px;}
+      }
       /* Remove unwanted gap between navigation header and hero slider */
       header.page-header, header{margin-bottom:0!important;padding-bottom:0!important;}
       .swiper-slider-3{margin-top:0!important;}
