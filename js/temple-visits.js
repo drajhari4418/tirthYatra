@@ -31,7 +31,7 @@ form.addEventListener("submit",async e=>{
   const templeId=templeSelect.value;
   const visitDate=document.getElementById("visit-date").value;
   if(!templeId||!visitDate)return;
-  const id=push(push(ref(db,`templeVisits/${currentUser.uid}`)).key;
+  const id=push(ref(db,`templeVisits/${currentUser.uid}`)).key;
   await set(ref(db,`templeVisits/${currentUser.uid}/${id}`),{
     userId:currentUser.uid,
     templeId,
