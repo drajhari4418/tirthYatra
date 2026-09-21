@@ -39,3 +39,6 @@ body{margin:0;}
  .ty-auth-slot #ty-login-btn,.ty-auth-slot #ty-logout-btn{padding:6px 8px;font-size:11px;}
 }
 .ty-react-legacy .preloader{display:none!important;}
+
+.ty-react-auth-page{padding-top:0!important;min-height:100vh;display:flex;align-items:center;justify-content:center;}
+.ty-react-auth-page #auth-form-slot{width:100%;}
