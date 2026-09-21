@@ -47,6 +47,15 @@
     "newsletter": {
       ".write": true,
       ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'admin'"
+    },
+    "prasadRatings": {
+      ".read": true,
+      "$prasadId": {
+        "$uid": {
+          ".write": "auth != null && auth.uid === $uid && newData.hasChildren(['score','userId','updatedAt']) && newData.child('userId').val() === auth.uid && newData.child('score').isNumber() && newData.child('score').val() >= 1 && newData.child('score').val() <= 5",
+          ".validate": "newData.child('score').isNumber() && newData.child('score').val() >= 1 && newData.child('score').val() <= 5 && newData.child('userId').val() === auth.uid"
+        }
+      }
     }
   }
 }
