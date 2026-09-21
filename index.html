@@ -767,46 +767,7 @@
 })();
 </script>
 
-<script id="ty-rating-feed">
-(function(){
-  var ratingUrl="ratings.json";
-  function renderRating(box,rating,count){
-    box.innerHTML="";
-    if(typeof rating!=="number" || rating <= 0){
-      box.textContent="No ratings yet";
-      box.setAttribute("aria-label","No ratings yet");
-      return;
-    }
-    var rounded=Math.round(rating);
-    for(var i=0;i<5;i++){
-      var star=document.createElement("span");
-      star.className="mdi "+(i<rounded ? "mdi-star" : "mdi-star-outline");
-      star.setAttribute("aria-hidden","true");
-      box.appendChild(star);
-    }
-    var label=rating.toFixed(1)+"/5"+(Number.isFinite(count) && count>0 ? " ("+count+" ratings)" : "");
-    box.setAttribute("aria-label",label);
-    box.setAttribute("title",label);
-  }
-  fetch(ratingUrl+"?v="+Date.now(),{cache:"no-store"})
-    .then(function(response){ if(!response.ok) throw new Error("Ratings feed unavailable"); return response.json(); })
-    .then(function(data){
-      document.querySelectorAll("[data-rating-key]").forEach(function(box){
-        var item=data[box.getAttribute("data-rating-key")];
-        if(item && typeof item.rating==="number"){
-          renderRating(box,item.rating,Number(item.count)||0);
-        }else{
-          renderRating(box,null,0);
-        }
-      });
-    })
-    .catch(function(){
-      document.querySelectorAll("[data-rating-key]").forEach(function(box){
-        renderRating(box,null,0);
-      });
-    });
-})();
-</script>
 
+<script type="module" src="js/prasad-ratings.js"></script>
 </body>
 </html>
