@@ -82,6 +82,58 @@
         .rd-navbar-brand .brand::before{width:32px;height:32px;font-size:19px;margin-right:6px;}
         .rd-navbar-brand .brand::after{font-size:18px;}
       }
+      /* Dynamic HD Best Destinations background */
+      .ty-destination-hero{
+        position:relative!important;
+        overflow:hidden!important;
+        background:#17212b!important;
+      }
+      .ty-destination-hero .ty-destination-bg{
+        position:absolute!important;
+        inset:-6%!important;
+        z-index:0!important;
+        background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Panorama%20Kedarnath%20Uttarakhand.jpg")!important;
+        background-size:cover!important;
+        background-position:center center!important;
+        background-repeat:no-repeat!important;
+        transform:scale(1.04);
+        animation:tyDestinationDrift 16s ease-in-out infinite alternate;
+        will-change:transform,background-position;
+      }
+      .ty-destination-hero::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        z-index:1;
+        pointer-events:none;
+        background:linear-gradient(90deg,rgba(5,16,28,.72) 0%,rgba(5,16,28,.38) 48%,rgba(5,16,28,.18) 100%);
+      }
+      .ty-destination-hero .parallax-content{
+        position:relative!important;
+        z-index:2!important;
+      }
+      .ty-destination-credit{
+        position:absolute;
+        right:18px;
+        bottom:10px;
+        z-index:3;
+        color:rgba(255,255,255,.72);
+        font:11px/1.4 system-ui,Arial,sans-serif;
+        text-shadow:0 1px 4px rgba(0,0,0,.8);
+      }
+      @keyframes tyDestinationDrift{
+        0%{transform:scale(1.04) translate3d(-1%,0,0);background-position:48% 50%}
+        50%{transform:scale(1.08) translate3d(0,-.7%,0);background-position:52% 48%}
+        100%{transform:scale(1.12) translate3d(1%,0,0);background-position:56% 50%}
+      }
+      @media(max-width:767px){
+        .ty-destination-hero .ty-destination-bg{inset:-10%!important;animation-duration:20s}
+        .ty-destination-credit{right:10px;bottom:7px;font-size:9px}
+      }
+      @media(prefers-reduced-motion:reduce){
+        .ty-destination-hero .ty-destination-bg{animation:none;transform:scale(1.04)}
+      }
+
       /* Fixed header: keep it at the top without RDNavbar sticky clones/overlap */
       html{scroll-padding-top:var(--ty-header-height);}
       body{overflow-x:hidden;}
@@ -411,7 +463,9 @@
 
       <!-- Section CTA-->
       <span id="packages" class="ty-anchor"></span>
-      <section class="primary-overlay section parallax-container" data-parallax-img="https://commons.wikimedia.org/wiki/Special:FilePath/Kedarnath%20temple%20view.jpg">
+      <section class="primary-overlay section parallax-container ty-destination-hero" data-parallax-img="https://commons.wikimedia.org/wiki/Special:FilePath/Panorama%20Kedarnath%20Uttarakhand.jpg">
+        <div class="ty-destination-bg" aria-hidden="true"></div>
+        <div class="ty-destination-credit">Photo: Surendra 1999 / Wikimedia Commons · CC BY-SA 4.0</div>
         <div class="parallax-content section-xl context-dark text-md-left">
           <div class="container">
             <div class="row justify-content-end">
