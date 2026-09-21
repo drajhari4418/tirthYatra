@@ -41,6 +41,7 @@ export function LegacyPage({page}){
         if(cancelled) return;
         await loadScript(s.src,s.module);
       }
+      if(!cancelled) window.dispatchEvent(new Event("load"));
     })();
     return ()=>{cancelled=true;document.querySelectorAll("script[data-ty-legacy]").forEach(s=>s.remove());};
   },[page]);
