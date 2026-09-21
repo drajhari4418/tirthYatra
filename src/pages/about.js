@@ -359,6 +359,6 @@ export default {
     
   `,
   styles: "",
-  scripts: [{"src":"js/html5shiv.min.js","module":false},{"src":"js/core.min.js","module":false},{"src":"js/script.js","module":false},{"src":"js/header-scroll.js","module":false},{"src":"js/auth-ui.js","module":true}],
+  scripts: [{"src":"js/core.min.js","module":false},{"src":"js/script.js","module":false}],
   title: "About us"
 };
