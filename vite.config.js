@@ -22,7 +22,6 @@ export default defineConfig({
   plugins: [copyLegacyAssets()],
   build: {
     target: "es2020",
-    cssMinify: "lightningcss",
     sourcemap: false
   }
 });
