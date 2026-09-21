@@ -136,7 +136,7 @@ function mountAuthUI() {
     }catch(e){error(e)}
   };
 
-  document.getElementById("ty-logout-btn").onclick=()=>signOut(auth);
+  document.getElementById("ty-logout-btn").onclick=async()=>{ modal.hidden=true; await signOut(auth); };
   showLogin();
 }
 
