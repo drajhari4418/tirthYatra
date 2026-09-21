@@ -15,6 +15,7 @@ export function Header(){
         <a href="about-us.html" onClick={()=>setOpen(false)}>About us</a>
         <a href="index.html#contact" onClick={()=>setOpen(false)}>Contact</a>
       </nav>
+      <div id="auth-form-slot" className="ty-auth-slot" aria-live="polite" />
       <button className="ty-react-menu" type="button" aria-label="Toggle navigation" aria-expanded={open} onClick={()=>setOpen(v=>!v)}>☰</button>
     </div>
   </header>;
@@ -34,9 +35,9 @@ function loadScript(src,isModule){
 
 const idle = (fn) => {
   if ("requestIdleCallback" in window) {
-    window.requestIdleCallback(fn,{timeout:1800});
+    window.requestIdleCallback(fn,{timeout:1200});
   } else {
-    window.setTimeout(fn,300);
+    window.setTimeout(fn,150);
   }
 };
 
@@ -51,11 +52,15 @@ export function LegacyPage({page}){
     const heavy=scripts.filter(s=>["core.min.js","script.js","header-scroll.js"].some(name=>s.src.endsWith(name)));
     const immediate=scripts.filter(s=>!heavy.includes(s));
 
-    (async()=>{
-      await Promise.all(immediate.map(s=>loadScript(s.src,s.module)));
+    const start=async()=>{
+      if(cancelled) return;
+      // Paint the React shell first; authentication and page behavior initialize immediately after.
+      for(const s of immediate){
+        if(cancelled) return;
+        await loadScript(s.src,s.module);
+      }
       if(cancelled) return;
       window.dispatchEvent(new Event("load"));
-
       idle(async()=>{
         if(cancelled) return;
         for(const s of heavy){
@@ -64,7 +69,10 @@ export function LegacyPage({page}){
         }
         if(!cancelled) window.dispatchEvent(new Event("load"));
       });
-    })();
+    };
+
+    if(document.readyState==="loading") requestAnimationFrame(start);
+    else requestAnimationFrame(start);
 
     return ()=>{
       cancelled=true;
