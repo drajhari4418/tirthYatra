@@ -25,3 +25,6 @@ body{margin:0;}
  .ty-react-menu{display:block;}
  .ty-react-legacy{padding-top:64px;}
 }
+
+/* React owns the first paint; the legacy animated preloader is intentionally skipped. */
+.ty-react-legacy .preloader{display:none!important;}
