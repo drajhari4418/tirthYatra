@@ -864,6 +864,34 @@
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
     <!-- coded by Himic-->
+    <script>
+      (function(){
+        var modal=document.getElementById("ty-product-modal");
+        var title=document.getElementById("ty-product-modal-title");
+        var description=document.getElementById("ty-product-modal-description");
+        if(!modal||!title||!description) return;
+        function closeModal(){
+          modal.hidden=true;
+          modal.setAttribute("aria-hidden","true");
+          document.body.style.overflow="";
+        }
+        document.querySelectorAll(".ty-view-product").forEach(function(button){
+          button.addEventListener("click",function(){
+            title.textContent=button.getAttribute("data-title")||"Prasad";
+            description.textContent=button.getAttribute("data-description")||"Prasad details are available on the Prasads page.";
+            modal.hidden=false;
+            modal.setAttribute("aria-hidden","false");
+            document.body.style.overflow="hidden";
+          });
+        });
+        modal.querySelectorAll("[data-ty-close]").forEach(function(el){
+          el.addEventListener("click",closeModal);
+        });
+        document.addEventListener("keydown",function(event){
+          if(event.key==="Escape"&&!modal.hidden) closeModal();
+        });
+      })();
+    </script>
     <script type="module" src="js/site-init.js"></script>
   <script src="js/header-scroll.js"></script>
   <script type="module" src="js/auth-ui.js"></script>
