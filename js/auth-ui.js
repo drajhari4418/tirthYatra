@@ -49,6 +49,8 @@ function mountAuthUI() {
     </div>`;
   const target = document.getElementById("auth-form-slot") || document.body;
   target.appendChild(wrap);
+  const serviceLinks = wrap.querySelector(".ty-auth-service-links");
+  if (serviceLinks && target.id === "auth-form-slot") document.body.appendChild(serviceLinks);
 
   const modal=document.getElementById("ty-auth-modal");
   const nameInput=document.getElementById("ty-auth-name");
