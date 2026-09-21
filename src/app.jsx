@@ -6,7 +6,9 @@ export function Header(){
   const [open,setOpen]=useState(false);
   return <header className="ty-react-header">
     <div className="ty-react-header-inner">
-      <a className="ty-react-brand" href="index.html" aria-label="TirthYatra home"><span className="ty-react-om">ॐ</span><span>TirthYatra</span></a>
+      <a className="ty-react-brand" href="index.html" aria-label="TirthYatra home">
+        <span className="ty-react-om">ॐ</span><span>TirthYatra</span>
+      </a>
       <nav className={`ty-react-nav${open?" is-open":""}`} aria-label="Primary navigation">
         <a href="index.html#packages" onClick={()=>setOpen(false)}>Packages</a>
         <a href="index.html#services" onClick={()=>setOpen(false)}>Services</a>
@@ -21,14 +23,22 @@ export function Header(){
 function loadScript(src,isModule){
   return new Promise(resolve=>{
     const s=document.createElement("script");
-    s.src=src+(src.includes("?")?"&":"?")+"tyReact="+Date.now();
+    s.src=src;
     if(isModule) s.type="module";
     s.dataset.tyLegacy="1";
-    s.onload=()=>resolve();
-    s.onerror=()=>resolve();
+    s.onload=resolve;
+    s.onerror=resolve;
     document.body.appendChild(s);
   });
 }
+
+const idle = (fn) => {
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(fn,{timeout:1800});
+  } else {
+    window.setTimeout(fn,300);
+  }
+};
 
 export function LegacyPage({page}){
   useEffect(()=>{
@@ -36,15 +46,32 @@ export function LegacyPage({page}){
     const host=document.getElementById("legacy-content");
     if(host) host.innerHTML=page.html;
     let cancelled=false;
+
+    const scripts=(page.scripts||[]).filter(s=>!s.src.includes("html5shiv.min.js"));
+    const heavy=scripts.filter(s=>["core.min.js","script.js","header-scroll.js"].some(name=>s.src.endsWith(name)));
+    const immediate=scripts.filter(s=>!heavy.includes(s));
+
     (async()=>{
-      for(const s of page.scripts){
+      await Promise.all(immediate.map(s=>loadScript(s.src,s.module)));
+      if(cancelled) return;
+      window.dispatchEvent(new Event("load"));
+
+      idle(async()=>{
         if(cancelled) return;
-        await loadScript(s.src,s.module);
-      }
-      if(!cancelled) window.dispatchEvent(new Event("load"));
+        for(const s of heavy){
+          if(cancelled) return;
+          await loadScript(s.src,s.module);
+        }
+        if(!cancelled) window.dispatchEvent(new Event("load"));
+      });
     })();
-    return ()=>{cancelled=true;document.querySelectorAll("script[data-ty-legacy]").forEach(s=>s.remove());};
+
+    return ()=>{
+      cancelled=true;
+      document.querySelectorAll("script[data-ty-legacy]").forEach(s=>s.remove());
+    };
   },[page]);
+
   return <><Header/><style dangerouslySetInnerHTML={{__html:page.styles}}/><main id="legacy-content" className="ty-react-legacy" /></>;
 }
 
