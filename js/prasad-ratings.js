@@ -1,7 +1,7 @@
 import { auth, db, ref, onValue, set, onAuthStateChanged } from "./firebase-app.js";
 
-const ratingNodes = [...document.querySelectorAll("[data-rating-key]")];
 const ratings = {};
+const getRatingNodes = () => [...document.querySelectorAll("[data-rating-key]")];
 const keyOf = node => node.getAttribute("data-rating-key");
 
 function escapeText(value){
@@ -44,7 +44,7 @@ function summarize(items){
 }
 
 function refreshAll(user){
-  ratingNodes.forEach(node => {
+  getRatingNodes().forEach(node => {
     const key = keyOf(node);
     const summary = summarize(ratings[key]);
     const userScore = user?.uid && ratings[key]?.[user.uid]?.score ? Number(ratings[key][user.uid].score) : 0;
@@ -88,10 +88,22 @@ onValue(ref(db, "prasadRatings"), snap => {
   refreshAll(auth.currentUser);
 }, error => {
   console.error("Unable to load live prasad ratings:", error);
-  ratingNodes.forEach(node => {
+  getRatingNodes().forEach(node => {
     node.textContent = "Ratings unavailable";
     node.setAttribute("aria-label", "Ratings unavailable");
   });
 });
 
 onAuthStateChanged(auth, user => refreshAll(user));
+
+
+/*
+ * Future-proofing:
+ * Any new prasad card only needs a unique data-rating-key attribute.
+ * This observer refreshes newly added rating elements without requiring
+ * another JavaScript edit.
+ */
+const ratingObserver = new MutationObserver(() => {
+  refreshAll(auth.currentUser);
+});
+ratingObserver.observe(document.body, { childList: true, subtree: true });
