@@ -99,11 +99,21 @@ onAuthStateChanged(auth, user => refreshAll(user));
 
 /*
  * Future-proofing:
- * Any new prasad card only needs a unique data-rating-key attribute.
- * This observer refreshes newly added rating elements without requiring
- * another JavaScript edit.
+ * Newly added prasad cards can use a unique data-rating-key.
+ * Only react when new rating elements are actually inserted. This avoids
+ * observing our own star/text rendering changes and causing an update loop.
  */
-const ratingObserver = new MutationObserver(() => {
-  refreshAll(auth.currentUser);
+const ratingObserver = new MutationObserver(mutations => {
+  const hasNewRatingNode = mutations.some(mutation =>
+    [...mutation.addedNodes].some(node =>
+      node.nodeType === 1 &&
+      (node.matches?.("[data-rating-key]") || node.querySelector?.("[data-rating-key]"))
+    )
+  );
+
+  if(hasNewRatingNode){
+    refreshAll(auth.currentUser);
+  }
 });
+
 ratingObserver.observe(document.body, { childList: true, subtree: true });
