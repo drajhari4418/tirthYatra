@@ -3,7 +3,9 @@
 @import url("/css/style.css");
 @import url("/css/header-scroll.css");
 
-.ty-react-app{--ty-header-height:76px;}
+:root{color-scheme:light;}
+html{scroll-behavior:smooth;}
+body{margin:0;}
 .ty-react-header{position:fixed;top:0;left:0;right:0;z-index:100000;background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.10);}
 .ty-react-header-inner{min-height:76px;display:flex;align-items:center;gap:30px;padding:0 28px;max-width:1440px;margin:0 auto;}
 .ty-react-brand{display:flex;align-items:center;gap:10px;text-decoration:none!important;color:#7c2d12!important;font:800 25px/1 Raleway,Arial,sans-serif;white-space:nowrap;}
