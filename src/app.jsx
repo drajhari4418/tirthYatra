@@ -42,6 +42,7 @@ const idle = (fn) => {
 };
 
 export function LegacyPage({page}){
+  const isAuthPage = page.title === "TirthYatra — Welcome";
   useEffect(()=>{
     document.title=page.title;
     const host=document.getElementById("legacy-content");
@@ -80,7 +81,7 @@ export function LegacyPage({page}){
     };
   },[page]);
 
-  return <><Header/><style dangerouslySetInnerHTML={{__html:page.styles}}/><main id="legacy-content" className="ty-react-legacy" /></>;
+  return <>{!isAuthPage && <Header/>}<style dangerouslySetInnerHTML={{__html:page.styles}}/><main id="legacy-content" className={`ty-react-legacy${isAuthPage?" ty-react-auth-page":""}`} /></>;
 }
 
 export function mount(page){
