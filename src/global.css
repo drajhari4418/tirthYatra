@@ -7,24 +7,35 @@
 html{scroll-behavior:smooth;}
 body{margin:0;}
 .ty-react-header{position:fixed;top:0;left:0;right:0;z-index:100000;background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.10);}
-.ty-react-header-inner{min-height:76px;display:flex;align-items:center;gap:30px;padding:0 28px;max-width:1440px;margin:0 auto;}
+.ty-react-header-inner{min-height:76px;display:flex;align-items:center;gap:22px;padding:0 28px;max-width:1440px;margin:0 auto;}
 .ty-react-brand{display:flex;align-items:center;gap:10px;text-decoration:none!important;color:#7c2d12!important;font:800 25px/1 Raleway,Arial,sans-serif;white-space:nowrap;}
 .ty-react-om{width:42px;height:42px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d97706,#9a3412);color:#fff;font:700 24px/1 Georgia,serif;}
 .ty-react-nav{margin-left:auto;display:flex;align-items:center;gap:24px;}
 .ty-react-nav a{color:#333;text-decoration:none;font-weight:600;}
 .ty-react-nav a:hover{color:#9a3412;}
+.ty-auth-slot{display:flex;align-items:center;flex:0 0 auto;min-width:0;}
+.ty-auth-slot #ty-auth-ui{display:flex;align-items:center;}
+.ty-auth-slot .ty-auth-bar{position:static!important;top:auto;right:auto;z-index:auto;padding:4px;background:transparent;border:0;box-shadow:none;backdrop-filter:none;font-size:13px;}
+.ty-auth-slot .ty-auth-right{display:flex;align-items:center;}
+.ty-auth-slot #ty-user-label{max-width:180px;overflow:hidden;text-overflow:ellipsis;}
+.ty-auth-slot .ty-auth-service-links{position:fixed;}
 .ty-react-menu{display:none;margin-left:auto;border:0;background:transparent;font-size:26px;cursor:pointer;}
 .ty-react-legacy{padding-top:76px;min-height:100vh;}
 .ty-react-legacy .page{padding-top:0!important;}
 @media(max-width:991px){
- .ty-react-header-inner{min-height:64px;padding:0 16px;}
+ .ty-react-header-inner{min-height:64px;padding:0 16px;gap:10px;}
  .ty-react-om{width:36px;height:36px;font-size:21px;}
  .ty-react-brand{font-size:21px;}
  .ty-react-nav{display:none;position:absolute;top:64px;left:0;right:0;background:#fff;padding:14px 18px;flex-direction:column;align-items:flex-start;box-shadow:0 8px 20px rgba(0,0,0,.12);}
  .ty-react-nav.is-open{display:flex;}
+ .ty-auth-slot{margin-left:auto;}
+ .ty-auth-slot .ty-auth-bar{padding:2px;}
+ .ty-auth-slot #ty-user-label{max-width:110px;}
  .ty-react-menu{display:block;}
  .ty-react-legacy{padding-top:64px;}
 }
-
-/* React owns the first paint; the legacy animated preloader is intentionally skipped. */
+@media(max-width:560px){
+ .ty-auth-slot #ty-user-label{max-width:90px;}
+ .ty-auth-slot #ty-login-btn,.ty-auth-slot #ty-logout-btn{padding:6px 8px;font-size:11px;}
+}
 .ty-react-legacy .preloader{display:none!important;}
