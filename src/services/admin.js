@@ -1,6 +1,6 @@
-import { auth, db, onAuthStateChanged, ensureUserProfile, ref, get, push, set, onValue } from "./firebase/client.js";
+import { auth, db, onAuthStateChanged, ensureUserProfile, ref, push, set, onValue } from "./firebase/client.js";
 
-const status=document.getElementById("admin-status"), panel=document.getElementById("admin-panel");
+const status=host.querySelector("admin-status"), panel=host.querySelector("admin-panel");
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
 onAuthStateChanged(auth, async user=>{
@@ -15,45 +15,46 @@ onAuthStateChanged(auth, async user=>{
 function bindRealtime(){
   onValue(ref(db,"prasads"),snap=>{
     const items=Object.entries(snap.val()||{}).map(([id,v])=>({id,...v}));
-    document.getElementById("prasad-list").innerHTML=items.length?items.map(x=>`<div class="ty-item"><strong>${esc(x.name)}</strong> — ₹${esc(x.price??"")} <small>(${x.available===false?"unavailable":"available"})</small></div>`).join(""):"<p>No prasads.</p>";
+    host.querySelector("prasad-list").innerHTML=items.length?items.map(x=>`<div class="ty-item"><strong>${esc(x.name)}</strong> — ₹${esc(x.price??"")} <small>(${x.available===false?"unavailable":"available"})</small></div>`).join(""):"<p>No prasads.</p>";
   });
   onValue(ref(db,"temples"),snap=>{
     const items=Object.entries(snap.val()||{}).map(([id,v])=>({id,...v}));
-    document.getElementById("temple-list").innerHTML=items.length?items.map(x=>`<div class="ty-item"><strong>${esc(x.name)}</strong> <small>${esc(x.city||"")}</small></div>`).join(""):"<p>No temples.</p>";
+    host.querySelector("temple-list").innerHTML=items.length?items.map(x=>`<div class="ty-item"><strong>${esc(x.name)}</strong> <small>${esc(x.city||"")}</small></div>`).join(""):"<p>No temples.</p>";
   });
   onValue(ref(db,"content"),snap=>{
     const items=Object.entries(snap.val()||{}).map(([id,v])=>({id,...v}));
-    document.getElementById("admin-list").innerHTML=items.length?items.map(x=>`<div class="ty-item"><strong>${esc(x.title||x.id)}</strong></div>`).join(""):"<p>No content yet.</p>";
+    host.querySelector("admin-list").innerHTML=items.length?items.map(x=>`<div class="ty-item"><strong>${esc(x.title||x.id)}</strong></div>`).join(""):"<p>No content yet.</p>";
   });
   onValue(ref(db,"templeVisits"),snap=>{
     const items=Object.entries(snap.val()||{}).map(([id,v])=>({id,...v})).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-    document.getElementById("visit-list").innerHTML=items.length?items.map(x=>`<div class="ty-item"><strong>${esc(x.templeName||x.templeId)}</strong> — ${esc(x.visitDate||"")}<br><small>User: ${esc(x.userId)}</small></div>`).join(""):"<p>No visits yet.</p>";
+    host.querySelector("visit-list").innerHTML=items.length?items.map(x=>`<div class="ty-item"><strong>${esc(x.templeName||x.templeId)}</strong> — ${esc(x.visitDate||"")}<br><small>User: ${esc(x.userId)}</small></div>`).join(""):"<p>No visits yet.</p>";
   });
   onValue(ref(db,"users"),snap=>{
     const items=Object.entries(snap.val()||{}).map(([id,v])=>({id,...v})).sort((a,b)=>(b.lastLoginAt||0)-(a.lastLoginAt||0));
-    document.getElementById("user-list").innerHTML=items.length?items.map(x=>`<div class="ty-item"><strong>${esc(x.name||"Unnamed")}</strong> — ${esc(x.email||"")} <small>[${esc(x.role||"user")}, ${esc(x.provider||"unknown")}]<br>UID: ${esc(x.uid||x.id)}</small></div>`).join(""):"<p>No user records.</p>";
+    host.querySelector("user-list").innerHTML=items.length?items.map(x=>`<div class="ty-item"><strong>${esc(x.name||"Unnamed")}</strong> — ${esc(x.email||"")} <small>[${esc(x.role||"user")}, ${esc(x.provider||"unknown")}]<br>UID: ${esc(x.uid||x.id)}</small></div>`).join(""):"<p>No user records.</p>";
   });
 }
 
-document.getElementById("prasad-form").addEventListener("submit",async e=>{
+host.querySelector("prasad-form").addEventListener("submit",async e=>{
   e.preventDefault();
-  const id=document.getElementById("prasad-id").value.trim();
+  const id=host.querySelector("prasad-id").value.trim();
   const r=id?ref(db,"prasads/"+id):push(ref(db,"prasads"));
-  await set(r,{name:document.getElementById("prasad-name").value.trim(),description:document.getElementById("prasad-description").value.trim(),price:Number(document.getElementById("prasad-price").value||0),image:document.getElementById("prasad-image").value.trim(),available:document.getElementById("prasad-available").checked,updatedAt:Date.now(),createdAt:Date.now()});
-  e.target.reset(); document.getElementById("prasad-available").checked=true;
+  await set(r,{name:host.querySelector("prasad-name").value.trim(),description:host.querySelector("prasad-description").value.trim(),price:Number(host.querySelector("prasad-price").value||0),image:host.querySelector("prasad-image").value.trim(),available:host.querySelector("prasad-available").checked,updatedAt:Date.now(),createdAt:Date.now()});
+  e.target.reset(); host.querySelector("prasad-available").checked=true;
 });
-document.getElementById("temple-form").addEventListener("submit",async e=>{
+host.querySelector("temple-form").addEventListener("submit",async e=>{
   e.preventDefault();
-  const id=document.getElementById("temple-id").value.trim();
+  const id=host.querySelector("temple-id").value.trim();
   const r=id?ref(db,"temples/"+id):push(ref(db,"temples"));
-  await set(r,{name:document.getElementById("temple-name").value.trim(),city:document.getElementById("temple-city").value.trim(),state:document.getElementById("temple-state").value.trim(),description:document.getElementById("temple-description").value.trim(),image:document.getElementById("temple-image").value.trim(),updatedAt:Date.now(),createdAt:Date.now()});
+  await set(r,{name:host.querySelector("temple-name").value.trim(),city:host.querySelector("temple-city").value.trim(),state:host.querySelector("temple-state").value.trim(),description:host.querySelector("temple-description").value.trim(),image:host.querySelector("temple-image").value.trim(),updatedAt:Date.now(),createdAt:Date.now()});
   e.target.reset();
 });
-document.getElementById("content-form").addEventListener("submit",async e=>{
+host.querySelector("content-form").addEventListener("submit",async e=>{
   e.preventDefault();
-  const id=document.getElementById("content-id").value.trim();
+  const id=host.querySelector("content-id").value.trim();
   const r=id?ref(db,"content/"+id):push(ref(db,"content"));
-  await set(r,{title:document.getElementById("content-title").value.trim(),body:document.getElementById("content-body").value,image:document.getElementById("content-image").value.trim(),updatedAt:Date.now(),createdAt:Date.now()});
+  await set(r,{title:host.querySelector("content-title").value.trim(),body:host.querySelector("content-body").value,image:host.querySelector("content-image").value.trim(),updatedAt:Date.now(),createdAt:Date.now()});
   e.target.reset();
 });
 
+}

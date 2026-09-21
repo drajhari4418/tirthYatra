@@ -19,10 +19,19 @@ function copyLegacyAssets() {
     closeBundle() {
       const root = resolve(process.cwd());
       const out = resolve(root, "dist");
-      for (const dir of ["css", "js", "images", "fonts"]) {
+      for (const dir of ["css", "images", "fonts"]) {
         const src = resolve(root, dir);
         const dest = resolve(out, dir);
         if (existsSync(src)) cpSync(src, dest, { recursive: true });
+      }
+      const legacyJs = ["core.min.js", "script.js"];
+      const jsRoot = resolve(root, "js");
+      const jsOut = resolve(out, "js");
+      if (existsSync(jsRoot)) {
+        for (const file of legacyJs) {
+          const src = resolve(jsRoot, file);
+          if (existsSync(src)) cpSync(src, resolve(jsOut, file));
+        }
       }
     }
   };

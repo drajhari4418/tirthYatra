@@ -8,6 +8,7 @@ import { bindContactForms } from "./services/contact.js";
 import { bindPrasads } from "./services/prasads.js";
 import { bindTempleVisits } from "./services/templeVisits.js";
 import { bindRatings } from "./services/ratings.js";
+import { bindAdmin } from "./services/admin.js";
 
 export function Header(){
   const [open,setOpen]=useState(false);
@@ -38,6 +39,7 @@ function bindPageBehavior(page, host){
   if(page.title==="About us" || page.title==="Contacts" || page.title==="Typography") cleanups.push(bindContactForms(host));
   if(page.title==="Prasads") cleanups.push(bindPrasads(host));
   if(page.title==="Temple Visits") cleanups.push(bindTempleVisits(host));
+  if(page.title==="TirthYatra — Admin") cleanups.push(bindAdmin(host));
   return ()=>cleanups.forEach(fn=>typeof fn==="function"&&fn());
 }
 
@@ -55,7 +57,7 @@ export function LegacyPage({page}){
     if(!host)return;
     const cleanupBehavior=bindPageBehavior(page,host);
     let cancelled=false;
-    const scripts=(page.scripts||[]).filter(s=>!s.src.includes("html5shiv.min.js")&&!["auth-ui.js","firebase-app.js","firebase-config.js","site-init.js","cms.js","contact.js","prasads.js","temple-visits.js","prasad-ratings.js"].includes(s.src.split("/").pop()));
+    const scripts=page.scripts||[];
     const heavy=scripts.filter(s=>["core.min.js","script.js","header-scroll.js"].some(name=>s.src.endsWith(name)));
     const immediate=scripts.filter(s=>!heavy.includes(s));
     const start=async()=>{if(cancelled)return;for(const s of immediate){if(cancelled)return;await loadScript(s.src,s.module)}if(cancelled)return;window.dispatchEvent(new Event("load"));idle(async()=>{if(cancelled)return;for(const s of heavy){if(cancelled)return;await loadScript(s.src,s.module)}if(!cancelled)window.dispatchEvent(new Event("load"))})};
