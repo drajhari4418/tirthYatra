@@ -237,6 +237,37 @@
 .ty-gallery-label{font-size:10px;font-weight:700;color:#fff;text-shadow:0 1px 5px #000}
 .ty-gallery-credit{margin:10px 0 0;font-size:9px;line-height:1.35;color:rgba(255,255,255,.62)}
 </style>
+      <style>
+        .ty-selected-prasads{position:relative}
+        .ty-prasad-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px}
+        .ty-prasad-heading h3{margin:3px 0 7px}
+        .ty-prasad-heading p{margin:0;color:#6b7280;max-width:650px}
+        .ty-section-kicker{display:block;text-transform:uppercase;letter-spacing:.14em;font-size:10px;font-weight:800;color:#b45309}
+        .ty-prasad-all{white-space:nowrap}
+        .ty-prasad-card{height:100%;padding-bottom:18px}
+        .ty-prasad-figure{height:245px;overflow:hidden;border-radius:10px;background:#f4efe7}
+        .ty-prasad-figure img{width:100%!important;height:100%!important;object-fit:cover;display:block;transition:transform .45s ease}
+        .ty-prasad-card:hover .ty-prasad-figure img{transform:scale(1.05)}
+        .ty-prasad-card .product-title{min-height:40px;margin-top:12px}
+        .ty-prasad-card .product-button{display:flex;flex-wrap:wrap;gap:8px}
+        .ty-prasad-card .button-wrap{margin:0}
+        .ty-prasad-card .button{white-space:nowrap}
+        .ty-prasad-credit{margin:22px 0 0;font-size:10px;color:#8b8175}
+        .ty-product-modal[hidden]{display:none!important}
+        .ty-product-modal{position:fixed;inset:0;z-index:11000;display:flex;align-items:center;justify-content:center;padding:20px}
+        .ty-product-modal-backdrop{position:absolute;inset:0;background:rgba(20,14,9,.66);backdrop-filter:blur(3px)}
+        .ty-product-modal-dialog{position:relative;z-index:1;width:min(520px,100%);background:#fff;border-radius:18px;padding:30px;box-shadow:0 25px 70px rgba(0,0,0,.28)}
+        .ty-product-modal-dialog h4{margin:5px 0 12px;color:#5b260f;font-size:26px}
+        .ty-product-modal-dialog p{margin:0 0 22px;color:#5f6368;line-height:1.7}
+        .ty-product-modal-close{position:absolute;right:12px;top:8px;border:0;background:transparent;font-size:30px;line-height:1;color:#6b625b;cursor:pointer}
+        .ty-product-modal-close:hover{color:#7c2d12}
+        @media(max-width:767px){
+          .ty-prasad-heading{align-items:flex-start;flex-direction:column}
+          .ty-prasad-figure{height:220px}
+          .ty-product-modal-dialog{padding:24px 20px}
+        }
+      </style>
+
     <link rel="stylesheet" href="css/header-scroll.css">
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
@@ -481,84 +512,97 @@
         </div>
       </section>
 
-      <!-- Our Shop-->
-      <section class="section section-lg bg-default">
+      <!-- Selected Prasads -->
+      <section class="section section-lg bg-default ty-selected-prasads">
         <div class="container">
-          <h3 class="oh-desktop"><span class="d-inline-block wow slideInUp">Selected Prasads</span></h3>
+          <div class="ty-prasad-heading">
+            <div>
+              <span class="ty-section-kicker">Sacred offerings</span>
+              <h3 class="oh-desktop"><span class="d-inline-block wow slideInUp">Selected Prasads</span></h3>
+              <p>Traditional Indian sweets and sacred offerings, presented with a TirthYatra touch.</p>
+            </div>
+            <a class="button button-sm button-secondary button-winona ty-prasad-all" href="prasads.html">View all Prasads</a>
+          </div>
+
           <div class="row row-lg row-30">
             <div class="col-sm-6 col-lg-4 col-xl-3">
-              <!-- Product-->
-              <article class="product wow fadeInLeft" data-wow-delay=".15s">
-                <div class="product-figure"><img src="images/prasad1.jpg" alt="" width="161" height="162"/>
+              <article class="product ty-prasad-card wow fadeInLeft" data-wow-delay=".15s">
+                <div class="product-figure ty-prasad-figure">
+                  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bundi%20Laddu.JPG" alt="Bundi Laddu Prasad" width="3456" height="2304" loading="lazy"/>
                 </div>
-                <div class="product-rating"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star text-gray-13"></span>
-                </div>
-                <h6 class="product-title">Margherita Prasads</h6>
-                <div class="product-price-wrap">
-                  <div class="product-price">$24.00</div>
-                </div>
+                <div class="product-rating" aria-label="5 out of 5 stars"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span></div>
+                <h6 class="product-title">Bundi Laddu Prasad</h6>
+                <div class="product-price-wrap"><div class="product-price">₹299</div></div>
                 <div class="product-button">
-                  <div class="button-wrap"><a class="button button-xs button-primary button-winona" href="#">Add to cart</a></div>
-                  <div class="button-wrap"><a class="button button-xs button-secondary button-winona" href="#">View Product</a></div>
+                  <div class="button-wrap"><a class="button button-xs button-primary button-winona" href="prasads.html">View more...</a></div>
+                  <div class="button-wrap"><button class="button button-xs button-secondary button-winona ty-view-product" type="button" data-title="Bundi Laddu Prasad" data-description="Golden boondi laddus made from gram-flour pearls, ghee and sugar. A classic Indian sweet that can be offered as a festive or devotional prasad.">View Product</button></div>
                 </div>
               </article>
             </div>
+
             <div class="col-sm-6 col-lg-4 col-xl-3">
-              <!-- Product-->
-              <article class="product wow fadeInLeft" data-wow-delay=".1s">
-                <div class="product-figure"><img src="images/prasad2.jpg" alt="" width="161" height="162"/>
+              <article class="product ty-prasad-card wow fadeInLeft" data-wow-delay=".1s">
+                <div class="product-figure ty-prasad-figure">
+                  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Besan%20ladoo.jpg" alt="Besan Ladoo Prasad" width="2592" height="4608" loading="lazy"/>
                 </div>
-                <div class="product-rating"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span>
-                </div>
-                <h6 class="product-title">Mushroom Prasads</h6>
-                <div class="product-price-wrap">
-                  <div class="product-price">$24.00</div>
-                </div>
+                <div class="product-rating" aria-label="5 out of 5 stars"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span></div>
+                <h6 class="product-title">Besan Ladoo Prasad</h6>
+                <div class="product-price-wrap"><div class="product-price">₹279</div></div>
                 <div class="product-button">
-                  <div class="button-wrap"><a class="button button-xs button-primary button-winona" href="#">Add to cart</a></div>
-                  <div class="button-wrap"><a class="button button-xs button-secondary button-winona" href="#">View Product</a></div>
-                </div><span class="product-badge product-badge-new">New</span>
+                  <div class="button-wrap"><a class="button button-xs button-primary button-winona" href="prasads.html">View more...</a></div>
+                  <div class="button-wrap"><button class="button button-xs button-secondary button-winona ty-view-product" type="button" data-title="Besan Ladoo Prasad" data-description="Soft, aromatic besan laddus prepared from roasted gram flour, ghee and sugar. A comforting mithai suitable for puja, festivals and devotional sharing.">View Product</button></div>
+                </div>
+                <span class="product-badge product-badge-new">New</span>
               </article>
             </div>
+
             <div class="col-sm-6 col-lg-4 col-xl-3">
-              <!-- Product-->
-              <article class="product wow fadeInLeft" data-wow-delay=".05s">
-                <div class="product-figure"><img src="images/prasad3.jpeg" alt="" width="161" height="162"/>
+              <article class="product ty-prasad-card wow fadeInLeft" data-wow-delay=".05s">
+                <div class="product-figure ty-prasad-figure">
+                  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Indori%20khajrana%20modak.png" alt="Modak Prasad" width="1117" height="747" loading="lazy"/>
                 </div>
-                <div class="product-rating"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star text-gray-13"></span>
-                </div>
-                <h6 class="product-title">Hawaiian Prasads/h6>
-                <div class="product-price-wrap">
-                  <div class="product-price">$24.00</div>
-                </div>
+                <div class="product-rating" aria-label="5 out of 5 stars"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star text-gray-13"></span></div>
+                <h6 class="product-title">Modak Prasad</h6>
+                <div class="product-price-wrap"><div class="product-price">₹349</div></div>
                 <div class="product-button">
-                  <div class="button-wrap"><a class="button button-xs button-primary button-winona" href="#">Add to cart</a></div>
-                  <div class="button-wrap"><a class="button button-xs button-secondary button-winona" href="#">View Product</a></div>
+                  <div class="button-wrap"><a class="button button-xs button-primary button-winona" href="prasads.html">View more...</a></div>
+                  <div class="button-wrap"><button class="button button-xs button-secondary button-winona ty-view-product" type="button" data-title="Modak Prasad" data-description="A traditional Indian sweet associated with Lord Ganesha worship. Modak is commonly prepared with a sweet filling and a delicate outer layer, making it a meaningful festive offering.">View Product</button></div>
                 </div>
               </article>
             </div>
+
             <div class="col-sm-6 col-lg-4 col-xl-3">
-              <!-- Product-->
-              <article class="product wow fadeInLeft">
-                <div class="product-figure"><img src="images/prasad4.webp" alt="" width="161" height="162"/>
+              <article class="product ty-prasad-card wow fadeInLeft">
+                <div class="product-figure ty-prasad-figure">
+                  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sweets%20of%20India%2002.jpg" alt="Assorted Indian Sweets Prasad" width="9248" height="6936" loading="lazy"/>
                 </div>
-                <div class="product-rating"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span>
-                </div>
-                <h6 class="product-title">Pesto Prasads/h6>
-                <div class="product-price-wrap">
-                  <div class="product-price product-price-old">$40.00</div>
-                  <div class="product-price">$24.00</div>
-                </div>
+                <div class="product-rating" aria-label="5 out of 5 stars"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span></div>
+                <h6 class="product-title">Assorted Mithai Prasad</h6>
+                <div class="product-price-wrap"><div class="product-price">₹399</div></div>
                 <div class="product-button">
-                  <div class="button-wrap"><a class="button button-xs button-primary button-winona" href="#">Add to cart</a></div>
-                  <div class="button-wrap"><a class="button button-xs button-secondary button-winona" href="#">View Product</a></div>
-                </div><span class="product-badge product-badge-sale">Sale</span>
+                  <div class="button-wrap"><a class="button button-xs button-primary button-winona" href="prasads.html">View more...</a></div>
+                  <div class="button-wrap"><button class="button button-xs button-secondary button-winona ty-view-product" type="button" data-title="Assorted Mithai Prasad" data-description="A festive assortment of Indian sweets, selected to bring variety to devotional offerings and celebrations. The exact assortment can vary by availability.">View Product</button></div>
+                </div>
+                <span class="product-badge product-badge-sale">Popular</span>
               </article>
             </div>
           </div>
+
+          <p class="ty-prasad-credit">Images: Wikimedia Commons. Image licenses and attribution details are available on their respective source pages.</p>
         </div>
       </section>
 
+      <!-- Product description modal -->
+      <div class="ty-product-modal" id="ty-product-modal" hidden aria-hidden="true">
+        <div class="ty-product-modal-backdrop" data-ty-close></div>
+        <div class="ty-product-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="ty-product-modal-title">
+          <button class="ty-product-modal-close" type="button" aria-label="Close product description" data-ty-close>&times;</button>
+          <span class="ty-section-kicker">Prasad details</span>
+          <h4 id="ty-product-modal-title">Product</h4>
+          <p id="ty-product-modal-description"></p>
+          <a class="button button-sm button-primary button-winona" href="prasads.html">View on Prasads page</a>
+        </div>
+      </div>
       <!-- Section CTA-->
       <section class="primary-overlay section parallax-container" data-parallax-img="images/discount.jpg">
         <div class="parallax-content section-xxl context-dark text-md-left">
